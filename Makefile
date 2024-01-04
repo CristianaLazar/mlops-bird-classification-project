@@ -37,8 +37,11 @@ clean:
 #################################################################################
 
 ## Process raw data into processed data
-data: requirements
-	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/data/make_dataset.py
+data_split:
+	$(PYTHON_INTERPRETER) src/data/split_train_val.py
+
+data:
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py
 
 #################################################################################
 # Documentation RULES                                                           #
