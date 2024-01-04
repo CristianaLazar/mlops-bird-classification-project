@@ -37,11 +37,13 @@ clean:
 #################################################################################
 
 ## Process raw data into processed data
-data_split:
-	$(PYTHON_INTERPRETER) src/data/split_train_val.py
-
 data:
 	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+
+
+# Visualize dataset distributions
+visualize_distribution:
+	$(PYTHON_INTERPRETER) src/visualizations/visualize.py
 
 #################################################################################
 # Documentation RULES                                                           #

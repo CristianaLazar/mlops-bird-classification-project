@@ -1,5 +1,8 @@
 docs/site/
 
+# actual data
+data
+
 # pipenv
 Pipfile
 Pipfile.lock
