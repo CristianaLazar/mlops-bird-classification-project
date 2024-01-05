@@ -1,7 +1,7 @@
 docs/site/
 
 # actual data
-data
+/data/
 
 # pipenv
 Pipfile
