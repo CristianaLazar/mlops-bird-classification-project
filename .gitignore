@@ -1,5 +1,13 @@
 docs/site/
 
+# actual data
+data
+
+# pipenv
+Pipfile
+Pipfile.lock
+.python-version
+
 # test cache
 manual_test/
 

@@ -37,8 +37,13 @@ clean:
 #################################################################################
 
 ## Process raw data into processed data
-data: requirements
-	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/data/make_dataset.py
+data:
+	$(PYTHON_INTERPRETER) src/data/make_dataset.py
+
+
+# Visualize dataset distributions
+visualize_distribution:
+	$(PYTHON_INTERPRETER) src/visualizations/visualize.py
 
 #################################################################################
 # Documentation RULES                                                           #
