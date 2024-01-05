@@ -3,11 +3,11 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mlops-face-shapes-project"
+name = "mlops-bird-project"
 version = "0.0.1"
-description = "This project aims to creat an application that can classify peploes face shape based on an image."
+description = "This project aims to creat an application that can classify birds based on an image."
 authors = [
-  { name = "Jonas s Roslev Gjerris Line Selma Petersen Christian Bakos Leirv\u00e5g", email = "your@email.com" },
+  { name = "Jonas s Roslev Gjerris Line Selma Petersen Christian Bakos Leirv Cristiana Lazar\u00e5g", email = "your@email.com" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
