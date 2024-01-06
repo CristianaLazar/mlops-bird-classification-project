@@ -45,6 +45,10 @@ data:
 visualize_distribution:
 	$(PYTHON_INTERPRETER) src/visualizations/visualize.py
 
+## Train the model
+train:
+	$(PYTHON_INTERPRETER) src/train_model.py train
+
 #################################################################################
 # Documentation RULES                                                           #
 #################################################################################

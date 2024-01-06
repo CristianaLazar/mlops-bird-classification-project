@@ -8,10 +8,10 @@ class ImageClassifier(pl.LightningModule):
     def __init__(
             self,
             model_name='efficientnet_es.ra_in1k',
-            num_classes=10,
+            num_classes=525,
             drop_rate=0.5,
             pretrained=False,
-            lr_backbone=None,
+            lr_encoder=None,
             lr_head=None,
             optimizer=None,
             criterion=None,
@@ -25,7 +25,7 @@ class ImageClassifier(pl.LightningModule):
             drop_rate=drop_rate
             )
         
-        self.lr_backbone = lr_backbone
+        self.lr_encoder = lr_encoder
         self.lr_head = lr_head
         self.optimizer = optimizer
 
@@ -79,7 +79,7 @@ class ImageClassifier(pl.LightningModule):
 
       # Create two parameter groups with different learning rates
       optimizer_groups = [
-          {'params': pre_trained_params, 'lr': self.lr_backbone},
+          {'params': pre_trained_params, 'lr': self.lr_encoder},
           {'params': final_layer_params, 'lr': self.lr_head}
       ]
 

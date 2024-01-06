@@ -3,6 +3,8 @@ docs/site/
 # actual data
 /data/
 
+wandb/
+
 # pipenv
 Pipfile
 Pipfile.lock
