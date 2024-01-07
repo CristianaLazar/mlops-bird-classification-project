@@ -1,0 +1,25 @@
+seed: 47
+
+model_name: efficientnet_es.ra_in1k
+pretrained: True
+lr_encoder: 3e-6
+lr_head: 3e-4
+
+optimizer: AdamW
+criterion: cross_entropy
+
+batch_size: 32
+num_workers: 4
+num_epochs: 100
+num_classes: 525
+drop_rate: 0.5
+resize_dims: [224, 224]
+augmentation_strategy: moderate
+
+log_every_n_steps: 10
+wandb_run_name: exp1_training_run
+wandb_project_name: mlops-bird-classification
+
+train_dir: data/raw/train
+val_dir: data/raw/validation
+file_name: model
