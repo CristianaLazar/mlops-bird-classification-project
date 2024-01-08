@@ -1,7 +1,7 @@
 import click
 import torch
-from torch.utils.data import datasets, DataLoader
-from torchvision import transforms
+from torch.utils.data import DataLoader
+from torchvision import datasets ,transforms
 
 from src.models.model import ImageClassifier
 from src.utils.utils import create_class_mappings, load_yaml_config

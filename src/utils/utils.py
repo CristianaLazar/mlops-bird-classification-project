@@ -1,6 +1,8 @@
 import os
 from typing import Dict, Tuple
 
+import yaml
+
 # Function to load config from YAML
 def load_yaml_config(filepath):
     with open(filepath, 'r') as file:
