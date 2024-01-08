@@ -1,4 +1,3 @@
-import numpy as np
 from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 from torchvision import datasets, transforms
@@ -64,7 +63,19 @@ class ImageFolderClassificationModule(pl.LightningDataModule):
         self.val_dataset = datasets.ImageFolder(root=self.val_dir, transform=self.val_transform)
 
     def train_dataloader(self):
-        return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=self.num_workers)
+        return DataLoader(
+            self.train_dataset, 
+            batch_size=self.batch_size, 
+            shuffle=True, 
+            num_workers=self.num_workers,
+            persistent_workers=True
+            )
 
     def val_dataloader(self):
-        return DataLoader(self.val_dataset, batch_size=self.batch_size, shuffle=False, num_workers=self.num_workers)
+        return DataLoader(
+            self.val_dataset, 
+            batch_size=self.batch_size, 
+            shuffle=False, 
+            num_workers=self.num_workers,
+            persistent_workers=True
+            )

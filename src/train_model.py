@@ -4,13 +4,10 @@ from pytorch_lightning import Trainer
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.callbacks import ModelCheckpoint
 
-from models.model import ImageClassifier
-from data.data import ImageFolderClassificationModule
+from src.models.model import ImageClassifier
+from src.data.data import ImageFolderClassificationModule
+from src.utils.utils import load_yaml_config
 
-# Function to load config from YAML
-def load_yaml_config(filepath):
-    with open(filepath, 'r') as file:
-        return yaml.safe_load(file)
 
 @click.group()
 def cli():
@@ -42,7 +39,7 @@ def train(model_name, num_classes, drop_rate, pretrained, lr_encoder, lr_head, o
           wandb_run_name, wandb_project_name, file_name, resize_dims, train_dir, val_dir, augmentation_strategy):
     """Train a model."""
     # Load normalization parameters from the YAML file
-    data_config = load_yaml_config("data/train_data_config.yaml")
+    data_config = load_yaml_config("data/data_config.yaml")
     normalization_mean = data_config['mean']
     normalization_std = data_config['std']
 
