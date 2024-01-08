@@ -60,7 +60,7 @@ def train(config: DictConfig) -> None:
             monitor="val_accuracy",
             mode="max"
         )],
-        accelerator="auto"
+        accelerator="auto", profiler="simple"
     )
 
     # Start training
