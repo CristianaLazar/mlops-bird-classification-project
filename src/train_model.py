@@ -32,7 +32,7 @@ def train(config: DictConfig) -> None:
         normalization_std=hparams.data.normalization.std,
         augmentation_strategy=hparams.data.augmentation_strategy,
         batch_size=hparams.training.batch_size,
-        num_workers=hparams.training.num_workers,
+        num_workers=hparams.training.num_workers
     )
     data_module.setup()
 
