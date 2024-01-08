@@ -1,25 +1,43 @@
-seed: 47
 
-model_name: efficientnet_es.ra_in1k
-pretrained: True
-lr_encoder: 3e-6
-lr_head: 3e-4
+reproducibility:
+  seed: 47
 
-optimizer: AdamW
-criterion: cross_entropy
+model:
+  model_name: 'efficientnet_b0'
+  num_classes: 525
+  drop_rate: 0.5
+  pretrained: true
 
-batch_size: 32
-num_workers: 4
-num_epochs: 100
-num_classes: 525
-drop_rate: 0.5
-resize_dims: [224, 224]
-augmentation_strategy: moderate
+optim:
+  lr_encoder: 3e-6
+  lr_head: 3e-4
+  optimizer: 'AdamW'
+  criterion: 'cross_entropy'
 
-log_every_n_steps: 10
-wandb_run_name: exp1_training_run
-wandb_project_name: mlops-bird-classification
+training:
+  batch_size: 32
+  num_epochs: 100
+  num_workers: 4
 
-train_dir: data/raw/train
-val_dir: data/raw/validation
-file_name: model
+logging:
+  log_every_n_steps: 10
+  wandb_run_name: 'training_run'
+  wandb_project_name: 'mlops-bird-classification'
+
+checkpoint:
+  file_name: 'model'
+
+data:
+  train_dir: 'data/raw/train'
+  val_dir: 'data/raw/validation'
+  resize_dims: [224, 224]
+  augmentation_strategy: 'moderate'
+  normalization:
+  mean:
+      - 0.473
+      - 0.468
+      - 0.395
+      std:
+      - 0.240
+      - 0.234
+      - 0.255
