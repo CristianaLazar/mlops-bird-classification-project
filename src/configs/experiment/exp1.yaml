@@ -1,4 +1,10 @@
 
+
+hydra:
+  run:
+    dir: .
+
+
 reproducibility:
   seed: 47
 
@@ -33,11 +39,11 @@ data:
   resize_dims: [224, 224]
   augmentation_strategy: 'moderate'
   normalization:
-  mean:
+    mean:
       - 0.473
       - 0.468
       - 0.395
-      std:
+    std:
       - 0.240
       - 0.234
       - 0.255

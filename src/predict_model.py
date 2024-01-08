@@ -1,4 +1,5 @@
 import click
+from hydra.utils import to_absolute_path
 import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets ,transforms
@@ -6,20 +7,17 @@ from torchvision import datasets ,transforms
 from src.models.model import ImageClassifier
 from src.utils.utils import create_class_mappings, load_yaml_config
 
+def setup_predict_model():
+    train_dir = to_absolute_path('data/raw/train')
+    return create_class_mappings(train_dir)
 
-# Example usage
-train_dir = 'data/raw/train'
+class_to_idx, idx_to_class = None, None
 
-class_to_idx, idx_to_class = create_class_mappings(train_dir)
 
 @click.group()
 def cli():
     """Command line interface."""
     pass
-
-data_config = load_yaml_config("data/data_config.yaml")
-normalization_mean = data_config['mean']
-normalization_std = data_config['std']
 
 @click.command()
 @click.argument("model_checkpoint")
@@ -67,6 +65,10 @@ def predict(model_checkpoint: str, data: str, resize_dim: int):
 cli.add_command(predict)
 
 if __name__ == "__main__":
+    class_to_idx, idx_to_class = setup_predict_model()
+    data_config = load_yaml_config("data/data_config.yaml")
+    normalization_mean = data_config['mean']
+    normalization_std = data_config['std']
     cli()
 
 

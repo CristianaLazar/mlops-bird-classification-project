@@ -47,7 +47,7 @@ visualize_distribution:
 
 ## Train the model
 train:
-	$(PYTHON_INTERPRETER) src/train_model.py train
+	$(PYTHON_INTERPRETER) src/train_model.py
 
 #################################################################################
 # Documentation RULES                                                           #
