@@ -1,0 +1,19 @@
+
+
+hydra:
+  run:
+    dir: .
+
+model_checkpoint: 'src/models/subfolder_name/model_checkpoint.ckpt'  # Update this path when we have a model
+data: 'data/raw/test/'                                  # Path to your test data
+resize_dim: 224                                         # Resize dimensions
+mean:
+      - 0.473
+      - 0.468
+      - 0.395
+std:
+  - 0.240
+  - 0.234
+  - 0.255
+
+
