@@ -1,7 +1,5 @@
 [core]
-    remote = remote_storage
-['remote "storage"']
-    url = gdrive://10rls8qsw9I6zSonmzY-oPA5gzz0x46T0
-['remote "remote_storage"']
-    url = gs://mlops_birds_bucket/
+    remote = myremote
+['remote "myremote"']
+    url = gs://mlops_bucket_birds_2
     version_aware = true
