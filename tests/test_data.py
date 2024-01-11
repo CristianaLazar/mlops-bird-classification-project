@@ -59,8 +59,8 @@ def test_data_loading(sample_data):
     assert val_dataloader.num_workers == data_module.num_workers
 
     # Test persistent_workers
-    assert train_dataloader.persistent_workers == True
-    assert val_dataloader.persistent_workers == True
+    assert train_dataloader.persistent_workers is True
+    assert val_dataloader.persistent_workers is True
 
     # Test iterating through dataloaders
     for batch in train_dataloader:

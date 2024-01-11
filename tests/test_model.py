@@ -1,6 +1,5 @@
 import torch
 import pytest
-import pytorch_lightning as pl
 from src.models.model import ImageClassifier
 
 
