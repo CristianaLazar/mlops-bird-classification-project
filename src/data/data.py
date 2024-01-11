@@ -2,18 +2,19 @@ from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 from torchvision import datasets, transforms
 
+
 class ImageFolderClassificationModule(pl.LightningDataModule):
     def __init__(
-            self, 
-            train_dir, 
-            val_dir, 
-            resize_dims, 
-            normalization_mean, 
-            normalization_std, 
-            augmentation_strategy,
-            batch_size = 32,
-            num_workers=4,
-            ):
+        self,
+        train_dir,
+        val_dir,
+        resize_dims,
+        normalization_mean,
+        normalization_std,
+        augmentation_strategy,
+        batch_size=32,
+        num_workers=4,
+    ):
         super().__init__()
         self.batch_size = batch_size
         self.num_workers = num_workers
@@ -34,11 +35,11 @@ class ImageFolderClassificationModule(pl.LightningDataModule):
         ]
 
         # Additional transforms based on augmentation level
-        if self.augmentation_strategy == 'light':
+        if self.augmentation_strategy == "light":
             augment_transforms = [
                 transforms.RandomHorizontalFlip(),
             ]
-        elif self.augmentation_strategy == 'moderate':
+        elif self.augmentation_strategy == "moderate":
             augment_transforms = [
                 transforms.RandomHorizontalFlip(),
                 transforms.RandomVerticalFlip(),
@@ -64,18 +65,18 @@ class ImageFolderClassificationModule(pl.LightningDataModule):
 
     def train_dataloader(self):
         return DataLoader(
-            self.train_dataset, 
-            batch_size=self.batch_size, 
-            shuffle=True, 
+            self.train_dataset,
+            batch_size=self.batch_size,
+            shuffle=True,
             num_workers=self.num_workers,
-            persistent_workers=True
-            )
+            persistent_workers=True,
+        )
 
     def val_dataloader(self):
         return DataLoader(
-            self.val_dataset, 
-            batch_size=self.batch_size, 
-            shuffle=False, 
+            self.val_dataset,
+            batch_size=self.batch_size,
+            shuffle=False,
             num_workers=self.num_workers,
-            persistent_workers=True
-            )
+            persistent_workers=True,
+        )

@@ -3,20 +3,22 @@ import pytest
 import pytorch_lightning as pl
 from src.models.model import ImageClassifier
 
+
 # Define a fixture to create an instance of the ImageClassifier for testing
 @pytest.fixture
 def image_classifier():
     model = ImageClassifier(
-        model_name='efficientnet_es.ra_in1k',
-        num_classes=2, # dummy classes
+        model_name="efficientnet_es.ra_in1k",
+        num_classes=2,  # dummy classes
         drop_rate=0.5,
         pretrained=False,
         lr_encoder=0.001,
         lr_head=0.01,
-        optimizer='Adam',
-        criterion='cross_entropy'
+        optimizer="Adam",
+        criterion="cross_entropy",
     )
     return model
+
 
 # Test the forward pass of the model
 def test_forward_pass(image_classifier):
@@ -34,6 +36,7 @@ def test_forward_pass(image_classifier):
     # Check output shape and type
     assert isinstance(output, torch.Tensor)
     assert output.shape == (batch_size, image_classifier.model.num_classes)  # Check the output shape
+
 
 # Test the training step of the model
 def test_training_step(image_classifier):
@@ -58,6 +61,7 @@ def test_training_step(image_classifier):
     # Check loss type and value
     assert isinstance(loss, torch.Tensor)
     assert loss >= 0  # Loss should be a non-negative value
+
 
 # Test the validation step of the model
 def test_validation_step(image_classifier):

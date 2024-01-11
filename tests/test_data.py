@@ -5,6 +5,7 @@ import torch
 from torchvision.transforms import ToPILImage
 from src.data.data import ImageFolderClassificationModule
 
+
 # Sample data for testing
 def create_sample_images(directory, num_images):
     os.makedirs(directory, exist_ok=True)
@@ -13,6 +14,7 @@ def create_sample_images(directory, num_images):
         img = torch.rand(3, 32, 32)  # Random image data
         img = to_img(img)
         img.save(os.path.join(directory, f"{i}.png"))
+
 
 @pytest.fixture
 def sample_data():
@@ -23,15 +25,18 @@ def sample_data():
     create_sample_images(val_dir, 20)
     yield train_dir, val_dir
 
+
 def test_data_loading(sample_data):
     train_dir, val_dir = sample_data
 
     resize_dims = (32, 32)
     normalization_mean = (0.5, 0.5, 0.5)
     normalization_std = (0.5, 0.5, 0.5)
-    augmentation_strategy = 'light'
+    augmentation_strategy = "light"
 
-    data_module = ImageFolderClassificationModule(train_dir, val_dir, resize_dims, normalization_mean, normalization_std, augmentation_strategy)
+    data_module = ImageFolderClassificationModule(
+        train_dir, val_dir, resize_dims, normalization_mean, normalization_std, augmentation_strategy
+    )
 
     # Test if setup method creates datasets
     data_module.setup()

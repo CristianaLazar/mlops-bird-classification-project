@@ -10,7 +10,6 @@ from src.utils.utils import create_class_mappings
 
 @hydra.main(config_path="configs", config_name="default_config.yaml", version_base="1.1")
 def predict(config: DictConfig) -> None:
-
     config = config.predict
 
     train_dir = hydra.utils.to_absolute_path(config.data)
@@ -18,17 +17,19 @@ def predict(config: DictConfig) -> None:
 
     model = ImageClassifier.load_from_checkpoint(
         checkpoint_path=config.model_checkpoint,
-        map_location='cpu',
+        map_location="cpu",
     )
     model.eval()
 
     # Define the transforms
-    base_transforms = transforms.Compose([
-        transforms.Resize((config.resize_dim, config.resize_dim)),
-        transforms.ToTensor(),
-        # Assuming normalization mean and std are part of your config
-        transforms.Normalize(mean=config.normalization.mean, std=config.normalization.std),
-    ])
+    base_transforms = transforms.Compose(
+        [
+            transforms.Resize((config.resize_dim, config.resize_dim)),
+            transforms.ToTensor(),
+            # Assuming normalization mean and std are part of your config
+            transforms.Normalize(mean=config.normalization.mean, std=config.normalization.std),
+        ]
+    )
 
     # Create the dataset and DataLoader
     dataset = datasets.ImageFolder(root=config.data, transform=base_transforms)
@@ -46,17 +47,10 @@ def predict(config: DictConfig) -> None:
             image_file_name = os.path.basename(image_path)
 
             # Store the results in a dictionary
-            results[image_file_name] = {
-                "certainty": top_prob.item(),
-                "class_name": idx_to_class[top_idx.item()]
-            }
+            results[image_file_name] = {"certainty": top_prob.item(), "class_name": idx_to_class[top_idx.item()]}
 
     return results
 
 
 if __name__ == "__main__":
     predict()
-
-
-
-

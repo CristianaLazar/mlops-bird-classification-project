@@ -3,10 +3,12 @@ from typing import Dict, Tuple
 
 import yaml
 
+
 # Function to load config from YAML
 def load_yaml_config(filepath):
-    with open(filepath, 'r') as file:
+    with open(filepath, "r") as file:
         return yaml.safe_load(file)
+
 
 def create_class_mappings(train_dir: str) -> Tuple[Dict[str, int], Dict[int, str]]:
     """
@@ -16,7 +18,7 @@ def create_class_mappings(train_dir: str) -> Tuple[Dict[str, int], Dict[int, str
     train_dir (str): Path to the training directory.
 
     Returns:
-    Tuple[Dict[str, int], Dict[int, str]]: A tuple containing two dictionaries, 
+    Tuple[Dict[str, int], Dict[int, str]]: A tuple containing two dictionaries,
                                            (class_to_idx, idx_to_class).
     """
     # List all subdirectories (classes)
