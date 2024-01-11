@@ -112,3 +112,5 @@ wandb==0.16.1
 wcwidth==0.2.12
 yarl==1.9.4 ; python_version >= '3.7'
 zc.lockfile==3.0.post1 ; python_version >= '3.7'
+pytest
+google-api-python-client
