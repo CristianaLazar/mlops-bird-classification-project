@@ -20,7 +20,7 @@ def plot_distribution(dest_root, dataset_type="train", save_path="reports/figure
     bar_width = 0.35  # Adjust bar width
     opacity = 0.8
 
-    bars = ax.bar(indices, counts, bar_width, alpha=opacity, color="b", label=dataset_type.capitalize())
+    ax.bar(indices, counts, bar_width, alpha=opacity, color="b", label=dataset_type.capitalize())
 
     ax.set_xlabel("Subfolder indices")
     ax.set_ylabel("Number of images")
