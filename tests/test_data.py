@@ -2,7 +2,7 @@ import pytest
 import os
 from torch.utils.data import DataLoader
 import torch
-from torchvision.transforms import ToPILImage
+from torchvision.transforms import ToPILImage # type: ignore
 from src.data.data import ImageFolderClassificationModule
 
 

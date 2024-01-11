@@ -10,7 +10,7 @@ def load_image(path: str) -> np.ndarray:
     """Load an image from the specified path."""
     image = cv2.imread(path, cv2.IMREAD_COLOR)
     if image is not None:
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) / 255.0  # Convert to RGB and normalize
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB).astype(np.float32) / 255.0  # Convert to RGB and normalize
     return image
 
 

@@ -4,14 +4,14 @@ from omegaconf import DictConfig
 import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms
+from torchvision import datasets, transforms # type: ignore
 
 from src.models.model import ImageClassifier
 from src.utils.utils import create_class_mappings
 
 
 @hydra.main(config_path="configs", config_name="default_config.yaml", version_base="1.1")
-def predict(config: DictConfig) -> None:
+def predict(config: DictConfig) -> dict:
     config = config.predict
 
     train_dir = hydra.utils.to_absolute_path(config.data)
@@ -49,7 +49,7 @@ def predict(config: DictConfig) -> None:
             image_file_name = os.path.basename(image_path)
 
             # Store the results in a dictionary
-            results[image_file_name] = {"certainty": top_prob.item(), "class_name": idx_to_class[top_idx.item()]}
+            results[image_file_name] = {"certainty": top_prob.item(), "class_name": idx_to_class[top_idx.item()]} # type: ignore
 
     return results
 

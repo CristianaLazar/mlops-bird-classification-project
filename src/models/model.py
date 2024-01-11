@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import pytorch_lightning as pl
 from torchmetrics.classification import Accuracy
-import timm
+import timm # type: ignore
 
 
 class ImageClassifier(pl.LightningModule):

@@ -1,6 +1,6 @@
 from torch.utils.data import DataLoader
 import pytorch_lightning as pl
-from torchvision import datasets, transforms
+from torchvision import datasets, transforms # type: ignore
 
 
 class ImageFolderClassificationModule(pl.LightningDataModule):
