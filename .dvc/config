@@ -1,5 +1,5 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = gs://mlops_bucket_birds_2
+    url = gs://mlops_birds_bucket
     version_aware = true
