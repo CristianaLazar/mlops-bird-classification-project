@@ -8,6 +8,7 @@ from pytorch_lightning.loggers import WandbLogger
 from src.data.data import ImageFolderClassificationModule
 from src.models.model import ImageClassifier
 
+
 @hydra.main(config_path="configs", config_name="default_config.yaml", version_base="1.1")
 def train(config: DictConfig) -> None:
     """
@@ -32,7 +33,7 @@ def train(config: DictConfig) -> None:
         normalization_std=hparams.data.normalization.std,
         augmentation_strategy=hparams.data.augmentation_strategy,
         batch_size=hparams.training.batch_size,
-        num_workers=hparams.training.num_workers
+        num_workers=hparams.training.num_workers,
     )
     data_module.setup()
 
@@ -53,19 +54,22 @@ def train(config: DictConfig) -> None:
         max_epochs=hparams.training.num_epochs,
         logger=WandbLogger(name=hparams.logging.wandb_run_name, project=hparams.logging.wandb_project_name),
         log_every_n_steps=hparams.logging.log_every_n_steps,
-        callbacks=[ModelCheckpoint(
-            dirpath="checkpoints/",
-            filename=hparams.checkpoint.file_name + '-{epoch:02d}-{val_accuracy:.2f}',
-            save_top_k=1,
-            monitor="val_accuracy",
-            mode="max"
-        )],
-        accelerator="auto", profiler="simple"
+        callbacks=[
+            ModelCheckpoint(
+                dirpath="checkpoints/",
+                filename=hparams.checkpoint.file_name + "-{epoch:02d}-{val_accuracy:.2f}",
+                save_top_k=1,
+                monitor="val_accuracy",
+                mode="max",
+            )
+        ],
+        accelerator="auto",
+        profiler="simple",
     )
 
     # Start training
     trainer.fit(model, data_module.train_dataloader(), data_module.val_dataloader())
 
+
 if __name__ == "__main__":
     train()
-

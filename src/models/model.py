@@ -4,36 +4,32 @@ import pytorch_lightning as pl
 from torchmetrics.classification import Accuracy
 import timm
 
+
 class ImageClassifier(pl.LightningModule):
     def __init__(
-            self,
-            model_name='efficientnet_es.ra_in1k',
-            num_classes=525,
-            drop_rate=0.5,
-            pretrained=False,
-            lr_encoder=None,
-            lr_head=None,
-            optimizer=None,
-            criterion=None,
-            ):
+        self,
+        model_name="efficientnet_es.ra_in1k",
+        num_classes=525,
+        drop_rate=0.5,
+        pretrained=False,
+        lr_encoder=None,
+        lr_head=None,
+        optimizer=None,
+        criterion=None,
+    ):
         super(ImageClassifier, self).__init__()
 
-        self.model = timm.create_model(
-            model_name, 
-            pretrained=pretrained, 
-            num_classes=num_classes,
-            drop_rate=drop_rate
-            )
-        
+        self.model = timm.create_model(model_name, pretrained=pretrained, num_classes=num_classes, drop_rate=drop_rate)
+
         self.lr_encoder = lr_encoder
         self.lr_head = lr_head
         self.optimizer = optimizer
 
-        if criterion == 'cross_entropy':
+        if criterion == "cross_entropy":
             self.criterion = nn.CrossEntropyLoss()
         else:
             self.criterion = nn.CrossEntropyLoss()
-        
+
         self.calc_accuracy = Accuracy(task="multiclass", num_classes=num_classes)
 
     def forward(self, x):
@@ -48,10 +44,9 @@ class ImageClassifier(pl.LightningModule):
 
         accuracy = self.calc_accuracy(preds, y)
 
-        self.log('train_loss', loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
-        self.log('train_accuracy', accuracy, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        self.log("train_loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        self.log("train_accuracy", accuracy, on_step=True, on_epoch=True, prog_bar=True, logger=True)
         return loss
-
 
     def validation_step(self, batch):
         x, y = batch
@@ -62,33 +57,32 @@ class ImageClassifier(pl.LightningModule):
 
         accuracy = self.calc_accuracy(preds, y)
 
-        self.log('val_loss', loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
-        self.log('val_accuracy', accuracy, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        self.log("val_loss", loss, on_step=True, on_epoch=True, prog_bar=True, logger=True)
+        self.log("val_accuracy", accuracy, on_step=True, on_epoch=True, prog_bar=True, logger=True)
         return loss
 
-
     def configure_optimizers(self):
-      # Separate the parameters of the pre-trained model and the newly added final layer
-      pre_trained_params = []
-      final_layer_params = []
-      for name, param in self.model.named_parameters():
-          if name.startswith('model.classifier'):
-              final_layer_params.append(param)
-          else:
-              pre_trained_params.append(param)
+        # Separate the parameters of the pre-trained model and the newly added final layer
+        pre_trained_params = []
+        final_layer_params = []
+        for name, param in self.model.named_parameters():
+            if name.startswith("model.classifier"):
+                final_layer_params.append(param)
+            else:
+                pre_trained_params.append(param)
 
-      # Create two parameter groups with different learning rates
-      optimizer_groups = [
-          {'params': pre_trained_params, 'lr': self.lr_encoder},
-          {'params': final_layer_params, 'lr': self.lr_head}
-      ]
+        # Create two parameter groups with different learning rates
+        optimizer_groups = [
+            {"params": pre_trained_params, "lr": self.lr_encoder},
+            {"params": final_layer_params, "lr": self.lr_head},
+        ]
 
-      # Initialize the optimizer with these parameter groups
-      if self.optimizer == 'Adam':
-          optimizer = torch.optim.Adam(optimizer_groups)
-      elif self.optimizer == 'AdamW':
-          optimizer = torch.optim.AdamW(optimizer_groups)
-      else:
-          optimizer = torch.optim.AdamW(optimizer_groups)
-          
-      return optimizer
+        # Initialize the optimizer with these parameter groups
+        if self.optimizer == "Adam":
+            optimizer = torch.optim.Adam(optimizer_groups)
+        elif self.optimizer == "AdamW":
+            optimizer = torch.optim.AdamW(optimizer_groups)
+        else:
+            optimizer = torch.optim.AdamW(optimizer_groups)
+
+        return optimizer
