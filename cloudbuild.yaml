@@ -1,7 +1,7 @@
 steps:
   - name: python
     entrypoint: bash
-    args: ['-c', 'pip install -U dvc dvc[gs]; dvc remote add -d remote_storage gs://birds_mlops/; dvc pull;']
+    args: ['-c', 'pip install -U dvc "dvc[gs]"; dvc pull;']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'dockerfiles/trainer.dockerfile', '-t', 'gcr.io/dtumlops/testing', '.']
   - name: 'gcr.io/cloud-builders/docker'
