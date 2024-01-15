@@ -1,7 +1,7 @@
 steps:
   - name: python
     entrypoint: bash
-    args: ['-c', 'mkdir data/ gsutil cp -r gs://birds_mlops/ data/']
+    args: ['-c', 'mkdir data/; gsutil cp -r gs://birds_mlops/ data/']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'dockerfiles/trainer.dockerfile', '-t', 'gcr.io/dtumlops/testing', '.']
   - name: 'gcr.io/cloud-builders/docker'
