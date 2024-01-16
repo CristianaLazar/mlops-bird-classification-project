@@ -7,7 +7,7 @@ RUN apt update && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 # Clone your repository
-RUN git clone -b bucket_mounting https://github.com/CristianaLazar/mlops-bird-classification-project.git
+RUN git clone -b train_gcs_bucket_exp1gcs https://github.com/CristianaLazar/mlops-bird-classification-project.git
 
 
 # COPY requirements.txt requirements.txt

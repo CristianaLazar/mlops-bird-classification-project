@@ -70,6 +70,5 @@ def train(config: DictConfig) -> None:
     # Start training
     trainer.fit(model, data_module.train_dataloader(), data_module.val_dataloader())
 
-
 if __name__ == "__main__":
     train()
