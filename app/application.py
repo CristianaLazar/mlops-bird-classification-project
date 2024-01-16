@@ -7,20 +7,19 @@ from PIL import Image
 from torchvision import transforms
 import torch
 import torch.nn.functional as F
+import pytorch_lightning as pl
+import timm
 
-from src.models.model import ImageClassifier
+
+class ModelSkeleton(pl.LightningModule):
+    def __init__(self, model_name="caformer_s36.sail_in22k_ft_in1k", num_classes=525):
+        super(ModelSkeleton, self).__init__()
+        self.model = timm.create_model(model_name, num_classes=num_classes)
+    def forward(self, x):
+        return self.model(x)
 
 
 app = FastAPI()
-
-@app.get("/Health_Check")
-def connection():
-    """ Checks if there is a connection to app. """
-    response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-    }
-    return response
 
 @app.post("/infer_image")
 async def single_inference(bird_image: UploadFile = File(...)):
@@ -34,15 +33,16 @@ async def single_inference(bird_image: UploadFile = File(...)):
     transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.473, 0.468, 0.395], std=[0.240, 0.234, 0.255]),
-    ])
+        transforms.Normalize(mean=[0.473, 0.468, 0.395], 
+                             std=[0.240, 0.234, 0.255])
+        ])
 
     image = transform(image).unsqueeze(0)
 
-    with open("src/utils/idx_to_class.json", 'r') as fp:
+    with open("app/idx_to_class.json", 'r') as fp:
         idx_to_class = json.load(fp)
 
-    model = ImageClassifier.load_from_checkpoint(
+    model = ModelSkeleton.load_from_checkpoint(
         checkpoint_path="models/model-epoch=12-val_accuracy=0.98.ckpt",
         map_location="cpu",
     )
@@ -61,4 +61,4 @@ async def single_inference(bird_image: UploadFile = File(...)):
     }
     return response
 
-# uvicorn --reload --port 8000 application:app
+# uvicorn --reload --port 8000 app.application:app
