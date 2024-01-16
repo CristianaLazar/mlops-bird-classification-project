@@ -4,7 +4,7 @@ steps:
     args:
     - '-c'
     - |
-      gsutil -m cp -r 'gs://birds_mlops/data/ '/workspace'
+      gsutil -m cp -r 'gs://birds_mlops/data/' '/workspace'
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'dockerfiles/trainer.dockerfile', '-t', 'gcr.io/dtumlops/testing', '.']
   - name: 'gcr.io/cloud-builders/docker'
