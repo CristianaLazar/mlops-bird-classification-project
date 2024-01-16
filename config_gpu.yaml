@@ -1,0 +1,13 @@
+# config_gpu.yaml
+workerPoolSpecs:
+  - machineSpec:
+      machineType: n1-standard-8
+      acceleratorType: NVIDIA_TESLA_K80 
+      acceleratorCount: 1
+    replicaCount: 1
+    containerSpec:
+      imageUri: gcr.io/igneous-visitor-410709/gcp_vm@sha256:1efe8f3cb0f294fd370768f43a2fd9a2d426713e7de3376bb0f07b8d6e35330e
+
+
+
+

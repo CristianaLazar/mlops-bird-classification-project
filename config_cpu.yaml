@@ -1,0 +1,7 @@
+# config_cpu.yaml
+workerPoolSpecs:
+    machineSpec:
+        machineType: n1-highmem-2
+    replicaCount: 1
+    containerSpec:
+        imageUri: gcr.io/igneous-visitor-410709/gcp_vm@sha256:0fe9441fddb7e730d3a1291333ef211f169e844e4d1f6ec9f35b81308e3c5253
