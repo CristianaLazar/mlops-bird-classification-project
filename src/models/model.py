@@ -8,7 +8,7 @@ import timm # type: ignore
 class ImageClassifier(pl.LightningModule):
     def __init__(
         self,
-        model_name="efficientnet_es.ra_in1k",
+        model_name="caformer_s36.sail_in22k_ft_in1k",
         num_classes=525,
         drop_rate=0.5,
         pretrained=False,

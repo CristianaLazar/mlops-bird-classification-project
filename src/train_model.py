@@ -5,8 +5,8 @@ from pytorch_lightning import Trainer, seed_everything
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import WandbLogger
 
-from src.data.data import ImageFolderClassificationModule
-from src.models.model import ImageClassifier
+from data.data import ImageFolderClassificationModule
+from models.model import ImageClassifier
 
 
 @hydra.main(config_path="configs", config_name="default_config.yaml", version_base="1.1")

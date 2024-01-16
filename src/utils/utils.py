@@ -30,3 +30,13 @@ def create_class_mappings(train_dir: str) -> Tuple[Dict[str, int], Dict[int, str
     idx_to_class: Dict[int, str] = {i: classes[i] for i in range(len(classes))}
 
     return class_to_idx, idx_to_class
+
+
+"""
+# Save mapping
+train_dir = "data/raw/test/"
+_, idx_to_class = create_class_mappings(train_dir)
+
+with open("src/utils/idx_to_class.json", 'w') as fp:
+    json.dump(idx_to_class, fp)
+"""
