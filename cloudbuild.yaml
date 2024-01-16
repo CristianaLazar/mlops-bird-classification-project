@@ -1,9 +1,12 @@
 steps:
-  - name: python
-    entrypoint: bash
-    args: ['-c', 'pip install -U dvc "dvc[gs]"; dvc pull -v;']
+  - name: 'gcr.io/cloud-builders/gsutil'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      gsutil -m cp -r 'gs://birds_mlops/data/' '/workspace'
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'dockerfiles/trainer.dockerfile', '-t', 'gcr.io/dtumlops/testing', '.']
+    args: ['build', '-f', 'dockerfiles/trainer.dockerfile', '-t', 'gcr.io/igneous-visitor-410709/trainer:latest', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/dtumlops/trainer:latest']
+    args: ['push', 'gcr.io/igneous-visitor-410709/trainer:latest']
 timeout: 14400s
