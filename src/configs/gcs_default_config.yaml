@@ -1,0 +1,3 @@
+defaults:
+    - experiment: exp1gcs
+    - predict: pred1gcs
