@@ -2,13 +2,13 @@ from http import HTTPStatus
 from io import BytesIO
 import json
 
-from fastapi import HTTPException, FastAPI, UploadFile, File
-from PIL import Image
-from torchvision import transforms
+from fastapi import HTTPException, FastAPI, UploadFile, File # type: ignore
+from PIL import Image # type: ignore
+from torchvision import transforms # type: ignore
 import torch
 import torch.nn.functional as F
 import pytorch_lightning as pl
-import timm
+import timm # type: ignore
 
 
 class ModelSkeleton(pl.LightningModule):
