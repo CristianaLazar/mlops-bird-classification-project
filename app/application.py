@@ -24,7 +24,7 @@ app = FastAPI()
 @app.post("/infer_image")
 async def single_inference(bird_image: UploadFile = File(...)):
     """Takes a jpeg image of a bird and runs inference on it."""
-    if not bird_image.filename.lower().endswith(('.jpg', '.jpeg')):
+    if not bird_image.filename.lower().endswith(('.jpg', '.jpeg')): # type: ignore
         raise HTTPException(status_code=400, detail="Invalid file type. Please upload a JPEG image.")
 
     image_data = await bird_image.read()
