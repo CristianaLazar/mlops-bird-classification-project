@@ -25,7 +25,7 @@ def cli():
 @cli.command()
 def html():
     """Convert README.md to html page."""
-    with open("README.md", "r") as file:
+    with open("reports/README.md", "r") as file:
         text = file.read()
     text = text[43:]  # remove header
 
