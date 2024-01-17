@@ -148,7 +148,24 @@ end of the project.
 >
 > Answer:
 
---- question 4 fill here ---
+In this project a `.toml` file was used for managing dependencies, compatible with different environment managers like pipenv, conda, and venv. This approach allowed flexibility in tool choice while ensuring a consistent development setup.
+
+For a new team member to set up their environment, the steps are as follows:
+
+1. **Clone the Repository**: Start by cloning the project repository.
+
+2. **Choose an Environment Manager**:
+   - For **venv**: Run `python -m venv env` and activate it with `source env/bin/activate` (Unix/macOS) or `env\Scripts\activate` (Windows).
+   - For **pipenv**: Use `pipenv shell` to create and activate the environment.
+   - For **conda**: Create a new environment with `conda create --name myenv` and activate it using `conda activate myenv`.
+
+3. **Install the Project**: Run `pip install -e .` in the project directory. This command installs the project in editable mode and also automatically installs build dependencies as specified in the `.toml` file and the dependencies listed in `requirements.txt`.
+
+4. **Install Additional Development Dependencies** (if applicable): For any optional development dependencies, install them from `requirements_dev.txt` using `pip install -r requirements_dev.txt`.
+
+This process ensures that the team member's development environment mirrors the project's setup, maintaining consistency across different setups.
+
+<<<<<WORDCOUNT: 190>>>>>
 
 ### Question 5
 
@@ -163,7 +180,14 @@ end of the project.
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+The project's code structure, initially set up using the provided cookiecutter template, underwent minor modifications to better suit the specific needs:
+
+- **Source Folder (`src`)**: Renamed the standard source folder to `src` for enhanced clarity.
+- **Config and Utils Folders**: Within `src`, added a `config` folder for Hydra configurations and a `utils` folder for essential utility scripts, like index to class mappings.
+
+Apart from these additions, all other folders from the cookiecutter template were utilized, with the exception of the `notebooks` folder, which was not needed for this project. These minor changes ensure that the project structure remains organized and efficient, while being tailored to the project.
+
+<<<<<WORDCOUNT: 105>>>>>
 
 ### Question 6
 
@@ -174,7 +198,9 @@ end of the project.
 >
 > Answer:
 
---- question 6 fill here ---
+Sticking to PEP 8 guidelines was the key strategy for code quality and format. In large-scale projects, this approach is important. It ensures the code is clear and uniform, which simplifies reading and teamwork. Following these standards also helps in keeping up the quality of the code, minimizes errors, and makes debugging easier. Essentially, it’s about easing the team collaboration by maintaining a strong codebase in more complex projects.
+
+<<<<<WORDCOUNT: 69>>>>>
 
 ## Version control
 
