@@ -1,0 +1,10 @@
+# config_cpu.yaml
+workerPoolSpecs:
+    machineSpec:
+        machineType: n1-highmem-2
+    replicaCount: 1
+    containerSpec:
+        imageUri: gcr.io/igneous-visitor-410709/trainer:latest
+        env:
+            - name: WANDB_API_KEY
+              value: c9206ac4476b20defea8bc2bd37ae56ab4e26ad9
