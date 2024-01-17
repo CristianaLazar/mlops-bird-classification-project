@@ -264,7 +264,9 @@ Sticking to PEP 8 guidelines was the key strategy for code quality and format. I
 >
 > Answer:
 
---- question 10 fill here ---
+Using Data Version Control (DVC) in the project provided an easy and seamless method to pull data onto VM instances for training, both on DTU's High-Performance Computing (HPC) Cluster and Google Cloud Platform (GCP). This setup allowed for straightforward synchronization of the latest datasets and models from the DVC remote (initially on Google Drive, then on a GCP bucket) directly to the VMs. Whether training was conducted on the HPC Cluster or GCP, DVC ensured that the most current version of the data was always used, streamlining the workflow and enhancing the efficiency and consistency of the training process across different platforms.
+
+<<<<<WORDCOUNT: 102>>>>>
 
 ### Question 11
 
