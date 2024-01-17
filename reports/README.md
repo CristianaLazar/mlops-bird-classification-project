@@ -333,10 +333,10 @@ A training pipeline was set up with PyTorch Lightning’s LightningModule and Tr
 > Answer:
 
 Buckets created in the project:
-![Buckets](reports/figures/buckets.png)
+![Buckets](figures/buckets.png)
 
 Example of structure in a data bucket:
-![Content example of Bucket](reports/figures/bucket_content.png)
+![Content example of Bucket](figures/bucket_content.png)
 
 
 ### Question 20
@@ -346,7 +346,7 @@ Example of structure in a data bucket:
 > Answer:
 
 Project container registry:
-![Containers](reports/figures/container_reg.png)
+![Containers](figures/container_reg.png)
 
 
 ### Question 21
