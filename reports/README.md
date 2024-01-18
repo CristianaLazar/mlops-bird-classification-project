@@ -460,14 +460,18 @@ Overall, our approach ensures a robust and automated process from local developm
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
 > **challenges?**
 >
-> Answer length: 200-400 words.
->
-> Example:
-> *The biggest challenges in the project was using ... tool to do ... . The reason for this was ...*
->
-> Answer:
 
---- question 26 fill here ---
+During the project development, we encountered some challenges. Firstly, the Data Version Control did not do as expected; we faced problems when data was stored in a Google Drive folder and a Google Cloud Bucket. Usually, we manage to make the DVC work by repeating the `dvc push` and `dvc pull` actions. 
+
+However, when it ran `dvc pull` on Google Cloud in order to create the docker image, it got stuck in the fetching phase. We overcome this issue in not a very elegant way by using `cp` and copying data directly from the bucket. Moreover, the creation time for a docker image in Google Cloud was ~1 hour due to the data copying, which slowed our progress. 
+
+An additional issue was the access to GPUs on Google Cloud, as we had to request quotas from Google Support. Unfortunately, we had to wait two working days for our request to proceed, even though we tried to rush the process and contact the Google Support team a couple of times.
+
+Another issue was lacking of billing transparency. It took a couple of searches in the Google Cloud Console to find the right billing account, as the educational billing account is not displayed by default, and afterwards, to find the credit reports.
+
+Overall, many of the tools and frameworks were unfamiliar to us. We encountered numerous errors, such as Google Cloud authentification issues,  python environment issues on dockers, memory issues, and so on, leading to extensive Google searches. However, ultimately, we succeeded in overcoming them.
+
+
 
 ### Question 27
 

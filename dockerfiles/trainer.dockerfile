@@ -1,5 +1,5 @@
 # Base image
-FROM nvidia/cuda:11.0.3-base-ubuntu20.04
+FROM nvcr.io/nvidia/pytorch:22.07-py3
 
 # install python
 RUN apt update && \
