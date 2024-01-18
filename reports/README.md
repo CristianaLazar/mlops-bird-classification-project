@@ -3,44 +3,7 @@ layout: default
 nav_exclude: true
 ---
 
-# Exam template for 02476 Machine Learning Operations
-
-This is the report template for the exam. Please only remove the text formatted as with three dashes in front and behind
-like:
-
-```--- question 1 fill here ---```
-
-where you instead should add your answers. Any other changes may have unwanted consequences when your report is auto
-generated in the end of the course. For questions where you are asked to include images, start by adding the image to
-the `figures` subfolder (please only use `.png`, `.jpg` or `.jpeg`) and then add the following code in your answer:
-
-```markdown
-![my_image](figures/<image>.<extension>)
-```
-
-In addition to this markdown file, we also provide the `report.py` script that provides two utility functions:
-
-Running:
-
-```bash
-python report.py html
-```
-
-will generate an `.html` page of your report. After deadline for answering this template, we will autoscrape
-everything in this `reports` folder and then use this utility to generate an `.html` page that will be your serve
-as your final handin.
-
-Running
-
-```bash
-python report.py check
-```
-
-will check your answers in this template against the constrains listed for each question e.g. is your answer too
-short, too long, have you included an image when asked to.
-
-For both functions to work it is important that you do not rename anything. The script have two dependencies that can
-be installed with `pip install click markdown`.
+# AvianSight: Bird Species Classification for Amateur Birdwatchers
 
 ## Overall project checklist
 
@@ -50,43 +13,43 @@ end of the project.
 
 ### Week 1
 
-* [ ] Create a git repository
-* [ ] Make sure that all team members have write access to the github repository
-* [ ] Create a dedicated environment for you project to keep track of your packages
-* [ ] Create the initial file structure using cookiecutter
+* [x] Create a git repository
+* [x] Make sure that all team members have write access to the github repository
+* [x] Create a dedicated environment for you project to keep track of your packages
+* [x] Create the initial file structure using cookiecutter
 * [ ] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
-* [ ] Add a model file and a training script and get that running
-* [ ] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
-* [ ] Remember to comply with good coding practices (`pep8`) while doing the project
-* [ ] Do a bit of code typing and remember to document essential parts of your code
-* [ ] Setup version control for your data or part of your data
-* [ ] Construct one or multiple docker files for your code
-* [ ] Build the docker files locally and make sure they work as intended
-* [ ] Write one or multiple configurations files for your experiments
-* [ ] Used Hydra to load the configurations and manage your hyperparameters
-* [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
+* [x] Add a model file and a training script and get that running
+* [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
+* [x] Remember to comply with good coding practices (`pep8`) while doing the project
+* [x] Do a bit of code typing and remember to document essential parts of your code
+* [x] Setup version control for your data or part of your data
+* [x] Construct one or multiple docker files for your code
+* [x] Build the docker files locally and make sure they work as intended
+* [x] Write one or multiple configurations files for your experiments
+* [x] Used Hydra to load the configurations and manage your hyperparameters
+* [x] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
-* [ ] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
+* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
       consider running a hyperparameter optimization sweep.
-* [ ] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
+* [x] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 ### Week 2
 
-* [ ] Write unit tests related to the data part of your code
-* [ ] Write unit tests related to model construction and or model training
-* [ ] Calculate the coverage.
-* [ ] Get some continuous integration running on the github repository
-* [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
-* [ ] Create a trigger workflow for automatically building your docker images
-* [ ] Get your model training in GCP using either the Engine or Vertex AI
-* [ ] Create a FastAPI application that can do inference using your model
+* [x] Write unit tests related to the data part of your code
+* [x] Write unit tests related to model construction and or model training
+* [x] Calculate the coverage.
+* [x] Get some continuous integration running on the github repository
+* [x] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
+* [x] Create a trigger workflow for automatically building your docker images
+* [x] Get your model training in GCP using either the Engine or Vertex AI
+* [x] Create a FastAPI application that can do inference using your model
 * [ ] If applicable, consider deploying the model locally using torchserve
-* [ ] Deploy your model in GCP using either Functions or Run as the backend
+* [x] Deploy your model in GCP using either Functions or Run as the backend
 
 ### Week 3
 
 * [ ] Check how robust your model is towards data drifting
-* [ ] Setup monitoring for the system telemetry of your deployed model
+* [x] Setup monitoring for the system telemetry of your deployed model
 * [ ] Setup monitoring for the performance of your deployed model
 * [ ] If applicable, play around with distributed data loading
 * [ ] If applicable, play around with distributed model training
@@ -101,35 +64,29 @@ end of the project.
 ## Group information
 
 ### Question 1
-> **Enter the group number you signed up on <learn.inside.dtu.dk>**
+> **Enter the group number you signed up on learn.inside.dtu.dk**
 >
 > Answer:
 
---- question 1 fill here ---
+This project has been executed by group: MLOps 4.
 
 ### Question 2
 > **Enter the study number for each member in the group**
 >
-> Example:
->
-> *sXXXXXX, sXXXXXX, sXXXXXX*
->
 > Answer:
 
---- question 2 fill here ---
+This project has been executed by students: s184202, s193973, s222681 and s222698
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We used the third-party framework ... in our project. We used functionality ... and functionality ... from the*
-> *package to do ... and ... in our project*.
->
 > Answer:
 
---- question 3 fill here ---
+We chose to work with the TIMM (PyTorch Image Models), PyTorch Lightning and TorchMetrics frameworks; where TIMM's pre-trained models, PyTorch Lightning's training framework and TorchMetrics' performance metrics formed a robust environment for developing a bird species classifier.
+
+The TIMM framework was central to our model development with its wide range of pre-trained computer vision models which allowed leveraging transfer learning in fine-tuning a classification model. The function `create_model` was used to initialise model architectures with pre-trained weights and tailor them to our dataset.
+
+A training pipeline was set up with PyTorch Lightning’s LightningModule and Trainer; organising training and validation steps, model checkpoints and logging with WANDB. This enabled us to focus on the model's logic rather than the boilerplate code. TorchMetrics was similarly used to handle performance metrics, providing a convenient and reliable way to calculate accuracy to be logged during both training and validation phases.
 
 ## Coding environment
 
@@ -372,20 +329,25 @@ end of the project.
 ### Question 19
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
-> **You can take inspiration from [this figure](figures/bucket.png).**
 >
 > Answer:
 
---- question 19 fill here ---
+Buckets created in the project:
+![Buckets](figures/buckets.png)
+
+Example of structure in a data bucket:
+![Content example of Bucket](figures/bucket_content.png)
+
 
 ### Question 20
 
 > **Upload one image of your GCP container registry, such that we can see the different images that you have stored.**
-> **You can take inspiration from [this figure](figures/registry.png).**
 >
 > Answer:
 
---- question 20 fill here ---
+Project container registry:
+![Containers](figures/container_reg.png)
+
 
 ### Question 21
 
@@ -401,16 +363,14 @@ end of the project.
 > **Did you manage to deploy your model, either in locally or cloud? If not, describe why. If yes, describe how and**
 > **preferably how you invoke your deployed service?**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *For deployment we wrapped our model into application using ... . We first tried locally serving the model, which*
-> *worked. Afterwards we deployed it in the cloud, using ... . To invoke the service an user would call*
-> *`curl -X POST -F "file=@file.json"<weburl>`*
->
 > Answer:
 
---- question 22 fill here ---
+The deployment process involved wrapping our trained model within a FastAPI application that enables users to run inference on JPG images of birds to receive the classification bird species name and certainty/probability as response. The application was then containerised to ensure consistent runs across environments by packaging the application and its dependencies into a Docker image. After verifying that the image ran as intended locally, it was pushed to the project's Cloud Registry and deployed with Cloud Run.
+
+To invoke the deployed service, users can send a POST request to the inference endpoint with a JPG image, replacing [path/to/image.jpg] with the correct image path:
+curl -X POST -F "bird_image=@[path/to/image.jpg]" https://aviansight-app-5gmfsq67rq-ew.a.run.app/infer_image
+
+PS: POST a selfie and see if you discover the application's Looney Bird easter egg.
 
 ### Question 23
 
