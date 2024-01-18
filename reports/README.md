@@ -130,7 +130,6 @@ The project's code structure, initially set up using the provided cookiecutter t
 
 Apart from these additions, all other folders from the cookiecutter template were utilized, with the exception of the `notebooks` folder, which was not needed for this project. These minor changes ensure that the project structure remains organized and efficient, while being tailored to the project.
 
-
 ### Question 6
 
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
@@ -139,7 +138,6 @@ Apart from these additions, all other folders from the cookiecutter template wer
 > Answer:
 
 Sticking to PEP 8 guidelines was the key strategy for code quality and format. In large-scale projects, this approach is important. It ensures the code is clear and uniform, which simplifies reading and teamwork. Following these standards also helps in keeping up the quality of the code, minimizes errors, and makes debugging easier. Essentially, it’s about easing the team collaboration by maintaining a strong codebase in more complex projects.
-
 
 ## Version control
 
@@ -195,6 +193,7 @@ Nevertheless, a high code coverage is a good indicator that the code has been te
 >
 > Answer:
 
+
 We made use of both branches and PRs in our project. For every task, we created a branch and also protected the main branch by
 adding the following rules: at least one person needs to approve any PR, all your workflows have to pass and all conversations need 
 to be resolved. By using branches and pull requests in version control it ensures that changes are reviewed before merging,
@@ -208,7 +207,6 @@ maintaining code integrity, and facilitating smoother project evolution.
 > Answer:
 
 Using Data Version Control (DVC) in the project provided an easy and seamless method to pull data onto VM instances for training, both on DTU's High-Performance Computing (HPC) Cluster and Google Cloud Platform (GCP). This setup allowed for straightforward synchronization of the latest datasets and models from the DVC remote (initially on Google Drive, then on a GCP bucket) directly to the VMs. Whether training was conducted on the HPC Cluster or GCP, DVC ensured that the most current version of the data was always used, streamlining the workflow and enhancing the efficiency and consistency of the training process across different platforms.
-
 
 ### Question 11
 
@@ -240,7 +238,6 @@ An example of a triggered workflow can be seen here: <https://github.com/Cristia
 
 Experiments are configured using Hydra with distinct YAML files for each experiment in a config group. For instance, exp1.yaml and exp2.yaml are placed in an experiment directory. To run an experiment, you specify the configuration file as a command-line argument. For example, to run exp1, the command is python train_model.py experiment=exp1. This approach replaces the need for an argparser, as Hydra handles the parsing and merging of configurations from the command line and the YAML files.
 
-
 ### Question 13
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
@@ -251,7 +248,6 @@ Experiments are configured using Hydra with distinct YAML files for each experim
 To secure reproducibility and minimize information loss in experiments, Hydra and PyTorch Lightning are employed. Each experiment is configured using a dedicated YAML file, providing consistent settings. When an experiment runs, Hydra creates a unique directory, storing all outputs, logs, and configurations, ensuring a comprehensive record.
 
 For randomness control, PyTorch Lightning's seed_everything function is used to seed all random number generators consistently. This is crucial for experiments with stochastic processes, maintaining reproducibility. To replicate an experiment, the same configuration file and seed are used, like running python train_model.py experiment=exp1. This approach, combining Hydra's configuration management with PyTorch Lightning's seeding, guarantees precise and replicable experiment documentation.
-
 
 ### Question 14
 
@@ -278,7 +274,6 @@ Below is an image showing the effects of these varying parameters and strategies
 
 The ongoing analysis of these metrics and adaptation of parameters aimed to refine the models, ensuring they are not only accurate but also effective and reliable for practical use.
 
-
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
@@ -303,8 +298,6 @@ To run the docker images:
 To automate the process even more, we created in Google Cloud a trigger for docker image creation. Every time a branch is merged into `main`, the docker files are created by using the configurations from `cloudbuild.yaml`. Once constructed, these docker images are executed using Google Cloud. 
 
 A link to the training Docker file can be found [here](https://github.com/CristianaLazar/mlops-bird-classification-project/blob/main/dockerfiles/trainer.dockerfile) 
-
-
 
 ### Question 16
 
