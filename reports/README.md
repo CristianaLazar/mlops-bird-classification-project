@@ -439,8 +439,7 @@ PS: POST a selfie and see if you discover the application's Looney Bird easter e
 ### Question 25
 
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
-> **You can take inspiration from [this figure](figures/overview.png). Additionally in your own words, explain the**
-> **overall steps in figure.**
+> **Additionally in your own words, explain the overall steps in figure.**
 >
 > Answer length: 200-400 words
 >
@@ -472,14 +471,12 @@ PS: POST a selfie and see if you discover the application's Looney Bird easter e
 > **State the individual contributions of each team member. This is required information from DTU, because we need to**
 > **make sure all members contributed actively to the project**
 >
-> Answer length: 50-200 words.
->
-> Example:
-> *Student sXXXXXX was in charge of developing of setting up the initial cookie cutter project and developing of the*
-> *docker containers for training our applications.*
-> *Student sXXXXXX was in charge of training our models in the cloud and deploying them afterwards.*
-> *All members contributed to code by...*
->
 > Answer:
 
---- question 27 fill here ---
+Student s184202 was in charge of setting up the repository with the cookie cutter template, DVC the dataset with Google Drive, creating training and model files, and training a model on DTU's HPC.
+
+Student s193973 was in charge of setting up config files and hydra, creating a GCP bucket, making a FastAPI application to run inference and deploying it as a Docker image on Cloud Run.
+
+Student s222681 was in charge of profiling the code, training a model on Vertex AI and setting up monitoring of the deployed model through SLO and alerts.
+
+Student s222698 was in charge of setting up unit tests, configuring continuous integration with workflows on GitHub, creating a GCP bucket and a trigger flow for automatically building Docker images.
