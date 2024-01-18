@@ -449,16 +449,7 @@ A link to the training Docker file can be found [here](https://github.com/Cristi
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
->
-> Answer length: 25-100 words.
->
-> Example:
-> *Group member 1 used ..., Group member 2 used ..., in total ... credits was spend during development. The service*
-> *costing the most was ... due to ...*
->
-> Answer:
-
---- question 24 fill here ---
+Analysing the billing report, we observed that the credits have been spent on the project and not on individual contributions. In the end, we end up using 44.08 credits for Cloud Storage, 3.16 for Compute Engine, 0.24 for Networking, and 0.03 for Cloud Run. Cloud Storage costs the most, even if we only store 5 GB of data.
 
 ## Overall discussion of project
 
