@@ -473,7 +473,7 @@ PS: POST a selfie and see if you discover the application's Looney Bird easter e
 >
 > Answer:
 
-Student s184202 was in charge of setting up the repository with the cookie cutter template, DVC the dataset with Google Drive, creating training and model files, and training a model on DTU's HPC.
+Student s184202 was in charge of setting up the repository with the cookie cutter template, DVC the dataset with Google Drive, creating training and model files using Pytorch Lightning and WANDB, and training a model on DTU's HPC.
 
 Student s193973 was in charge of setting up config files and hydra, creating a GCP bucket, making a FastAPI application to run inference and deploying it as a Docker image on Cloud Run.
 
