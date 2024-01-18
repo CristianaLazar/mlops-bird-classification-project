@@ -17,7 +17,7 @@ end of the project.
 * [x] Make sure that all team members have write access to the github repository
 * [x] Create a dedicated environment for you project to keep track of your packages
 * [x] Create the initial file structure using cookiecutter
-* [ ] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
+* [x] Fill out the `make_dataset.py` (`save_data_mean_std.py`) file such that it downloads whatever data you need
 * [x] Add a model file and a training script and get that running
 * [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
 * [x] Remember to comply with good coding practices (`pep8`) while doing the project
@@ -50,16 +50,16 @@ end of the project.
 
 * [ ] Check how robust your model is towards data drifting
 * [x] Setup monitoring for the system telemetry of your deployed model
-* [ ] Setup monitoring for the performance of your deployed model
-* [ ] If applicable, play around with distributed data loading
-* [ ] If applicable, play around with distributed model training
+* [x] Setup monitoring for the performance of your deployed model
+* [x] If applicable, play around with distributed data loading
+* [x] If applicable, play around with distributed model training
 * [ ] Play around with quantization, compilation and pruning for you trained models to increase inference speed
 
 ### Additional
 
-* [ ] Revisit your initial project description. Did the project turn out as you wanted?
-* [ ] Make sure all group members have a understanding about all parts of the project
-* [ ] Uploaded all your code to github
+* [x] Revisit your initial project description. Did the project turn out as you wanted?
+* [x] Make sure all group members have a understanding about all parts of the project
+* [x] Uploaded all your code to github
 
 ## Group information
 
@@ -97,41 +97,49 @@ A training pipeline was set up with PyTorch Lightning’s LightningModule and Tr
 > **Explain how you managed dependencies in your project? Explain the process a new team member would have to go**
 > **through to get an exact copy of your environment.**
 >
-> Answer length: 100-200 words
->
-> Example:
-> *We used ... for managing our dependencies. The list of dependencies was auto-generated using ... . To get a*
-> *complete copy of our development environment, one would have to run the following commands*
->
 > Answer:
 
---- question 4 fill here ---
+In this project a `.toml` file was used for managing dependencies, compatible with different environment managers like pipenv, conda, and venv. This approach allowed flexibility in tool choice while ensuring a consistent development setup.
+
+For a new team member to set up their environment, the steps are as follows:
+
+1. **Clone the Repository**: Start by cloning the project repository.
+
+2. **Choose an Environment Manager**:
+   - For **venv**: Run `python -m venv env` and activate it with `source env/bin/activate` (Unix/macOS) or `env\Scripts\activate` (Windows).
+   - For **pipenv**: Use `pipenv shell` to create and activate the environment.
+   - For **conda**: Create a new environment with `conda create --name myenv` and activate it using `conda activate myenv`.
+
+3. **Install the Project**: Run `pip install -e .` in the project directory. This command installs the project in editable mode and also automatically installs build dependencies as specified in the `.toml` file and the dependencies listed in `requirements.txt`.
+
+4. **Install Additional Development Dependencies** (if applicable): For any optional development dependencies, install them from `requirements_dev.txt` using `pip install -r requirements_dev.txt`.
+
+This process ensures that the team member's development environment mirrors the project's setup, maintaining consistency across different setups.
 
 ### Question 5
 
 > **We expect that you initialized your project using the cookiecutter template. Explain the overall structure of your**
 > **code. Did you fill out every folder or only a subset?**
 >
-> Answer length: 100-200 words
->
-> Example:
-> *From the cookiecutter template we have filled out the ... , ... and ... folder. We have removed the ... folder*
-> *because we did not use any ... in our project. We have added an ... folder that contains ... for running our*
-> *experiments.*
 > Answer:
 
---- question 5 fill here ---
+The project's code structure, initially set up using the provided cookiecutter template, underwent minor modifications to better suit the specific needs:
+
+- **Source Folder (`src`)**: Renamed the standard source folder to `src` for enhanced clarity.
+- **Config and Utils Folders**: Within `src`, added a `config` folder for Hydra configurations and a `utils` folder for essential utility scripts, like index to class mappings.
+
+Apart from these additions, all other folders from the cookiecutter template were utilized, with the exception of the `notebooks` folder, which was not needed for this project. These minor changes ensure that the project structure remains organized and efficient, while being tailored to the project.
+
 
 ### Question 6
 
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
 > **concepts matters in larger projects.**
 >
-> Answer length: 50-100 words.
->
 > Answer:
 
---- question 6 fill here ---
+Sticking to PEP 8 guidelines was the key strategy for code quality and format. In large-scale projects, this approach is important. It ensures the code is clear and uniform, which simplifies reading and teamwork. Following these standards also helps in keeping up the quality of the code, minimizes errors, and makes debugging easier. Essentially, it’s about easing the team collaboration by maintaining a strong codebase in more complex projects.
+
 
 ## Version control
 
@@ -187,15 +195,10 @@ A training pipeline was set up with PyTorch Lightning’s LightningModule and Tr
 > **Did you use DVC for managing data in your project? If yes, then how did it improve your project to have version**
 > **control of your data. If no, explain a case where it would be beneficial to have version control of your data.**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We did make use of DVC in the following way: ... . In the end it helped us in ... for controlling ... part of our*
-> *pipeline*
->
 > Answer:
 
---- question 10 fill here ---
+Using Data Version Control (DVC) in the project provided an easy and seamless method to pull data onto VM instances for training, both on DTU's High-Performance Computing (HPC) Cluster and Google Cloud Platform (GCP). This setup allowed for straightforward synchronization of the latest datasets and models from the DVC remote (initially on Google Drive, then on a GCP bucket) directly to the VMs. Whether training was conducted on the HPC Cluster or GCP, DVC ensured that the most current version of the data was always used, streamlining the workflow and enhancing the efficiency and consistency of the training process across different platforms.
+
 
 ### Question 11
 
@@ -223,61 +226,74 @@ A training pipeline was set up with PyTorch Lightning’s LightningModule and Tr
 > **How did you configure experiments? Did you make use of config files? Explain with coding examples of how you would**
 > **run a experiment.**
 >
-> Answer length: 50-100 words.
->
-> Example:
-> *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
->
 > Answer:
 
---- question 12 fill here ---
+Experiments are configured using Hydra with distinct YAML files for each experiment in a config group. For instance, exp1.yaml and exp2.yaml are placed in an experiment directory. To run an experiment, you specify the configuration file as a command-line argument. For example, to run exp1, the command is python train_model.py experiment=exp1. This approach replaces the need for an argparser, as Hydra handles the parsing and merging of configurations from the command line and the YAML files.
+
 
 ### Question 13
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
 > **is lost when running experiments and that your experiments are reproducible?**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We made use of config files. Whenever an experiment is run the following happens: ... . To reproduce an experiment*
-> *one would have to do ...*
->
 > Answer:
 
---- question 13 fill here ---
+To secure reproducibility and minimize information loss in experiments, Hydra and PyTorch Lightning are employed. Each experiment is configured using a dedicated YAML file, providing consistent settings. When an experiment runs, Hydra creates a unique directory, storing all outputs, logs, and configurations, ensuring a comprehensive record.
+
+For randomness control, PyTorch Lightning's seed_everything function is used to seed all random number generators consistently. This is crucial for experiments with stochastic processes, maintaining reproducibility. To replicate an experiment, the same configuration file and seed are used, like running python train_model.py experiment=exp1. This approach, combining Hydra's configuration management with PyTorch Lightning's seeding, guarantees precise and replicable experiment documentation.
+
 
 ### Question 14
 
 > **Upload 1 to 3 screenshots that show the experiments that you have done in W&B (or another experiment tracking**
-> **service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. You can take**
-> **inspiration from [this figure](figures/wandb.png). Explain what metrics you are tracking and why they are**
-> **important.**
->
-> Answer length: 200-300 words + 1 to 3 screenshots.
->
-> Example:
-> *As seen in the first image when have tracked ... and ... which both inform us about ... in our experiments.*
-> *As seen in the second image we are also tracking ... and ...*
+> **service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. Explain what metrics you are tracking**
+> **and why they are important.**
 >
 > Answer:
 
---- question 14 fill here ---
+In the project, tracking training and validation loss, along with accuracy, both on a step-wise and per epoch basis, was essential for evaluating model performance under various conditions.
+
+Logging both training and validation metrics is critical. Training metrics assess how well the model learns from the dataset, but they don't tell the whole story. Over-reliance on training data can lead to overfitting. Validation metrics, however, provide insight into the model's ability to generalize to new data, a crucial factor for real-world applicability.
+
+The step-wise tracking, as depicted in the image below, offers a granular view of the model's performance on different data batches. This level of detail can uncover fluctuations in model performance that might not be apparent from epoch-wise metrics alone.
+
+![Step-wise Stability Analysis](figures/step_wise_stability.png)
+
+The experiments conducted involved testing various image resizing parameters (224 and 384) and augmentation strategies. Analyzing how these factors impacted the key metrics was key to optimizing the models for accuracy.
+
+Also, the project compared different model sizes: one larger for cloud-based deployment and a smaller one for on-device applications. This differentiation was essential to envistigate weather an on-device model was viable without sacrificing too much model performance. 
+Below is an image showing the effects of these varying parameters and strategies on the model's performance.
+
+![Training and Validation Metrics](figures/train_val_metrics.png)
+
+The ongoing analysis of these metrics and adaptation of parameters aimed to refine the models, ensuring they are not only accurate but also effective and reliable for practical use.
+
 
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
 > **experiments? Include how you would run your docker images and include a link to one of your docker files.**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *For our project we developed several images: one for training, inference and deployment. For example to run the*
-> *training docker image: `docker run trainer:latest lr=1e-3 batch_size=64`. Link to docker file: <weblink>*
->
-> Answer:
 
---- question 15 fill here ---
+As reproducibility is crucial, for this project, we developed several images: one for training, one for inference and one for deployment - to guarantee that the application can run on any device.  The following commands can be used to create and run the docker files:
+
+To build the docker file into a docker image:
+```
+    docker build -f dockerfiles/trainer.dockerfile . -t trainer:latest
+    docker build -f dockerfiles/predicter.dockerfile . -t predicter:latest
+```
+
+To run the docker images:
+```
+    docker run --name experiment1 trainer:latest
+    docker run --name predict predicter:latest 
+```
+
+To automate the process even more, we created in Google Cloud a trigger for docker image creation. Every time a branch is merged into `main`, the docker files are created by using the configurations from `cloudbuild.yaml`. Once constructed, these docker images are executed using Google Cloud. 
+
+A link to the training Docker file can be found [here](https://github.com/CristianaLazar/mlops-bird-classification-project/blob/main/dockerfiles/trainer.dockerfile) 
+
+
 
 ### Question 16
 
@@ -352,11 +368,12 @@ Project container registry:
 ### Question 21
 
 > **Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in**
-> **your project. You can take inspiration from [this figure](figures/build.png).**
+> **your project.**
 >
 > Answer:
 
---- question 21 fill here ---
+Project's Cloud Build history:
+![Containers](figures/cloud_build.png)
 
 ### Question 22
 
