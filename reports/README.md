@@ -150,45 +150,55 @@ Sticking to PEP 8 guidelines was the key strategy for code quality and format. I
 
 > **How many tests did you implement and what are they testing in your code?**
 >
-> Answer length: 50-100 words.
->
-> Example:
-> *In total we have implemented X tests. Primarily we are testing ... and ... as these the most critical parts of our*
-> *application but also ... .*
->
 > Answer:
 
---- question 7 fill here ---
+In total, we have implemented four tests. These tests have been made to guarantee the reliability and robustness of our data 
+handling and model generation components. For the data handling a single test was created, `test_data_loading`, that assures that 
+the data is properly loaded. 
+
+For the model generation, we implemented three tests: `test_forward_pass` - which tests the forward pass of the model, 
+`test_training_step` - which tests the training pass of the model, and `test_validation_step` - which tests the validation pass of  
+the model.
+	
 
 ### Question 8
 
 > **What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close**
 > **to), would you still trust it to be error free? Explain you reasoning.**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *The total code coverage of code is X%, which includes all our source code. We are far from 100% coverage of our **
-> *code and even if we were then...*
->
 > Answer:
 
---- question 8 fill here ---
+The total code coverage of the code is 90%, as can be seen from the output of `coverage report`:
+```
+Name                     Stmts   Miss  Cover
+--------------------------------------------
+src/__init__.py              0      0   100%
+src/data/__init__.py         0      0   100%
+src/data/data.py            32      4    88%
+src/models/__init__.py       0      0   100%
+src/models/model.py         50     14    72%
+tests/__init__.py            4      0   100%
+tests/test_data.py          55      0   100%
+tests/test_model.py         40      0   100%
+--------------------------------------------
+TOTAL                      181     18    90%
+
+```
+Even if the coverage is 10% far from the perfect one, this does not guarantee the lack of bugs and errors in the code.
+Despite our extensive testing of the data loader and model training modules, unforeseen interactions and edge cases may still exist. 
+Nevertheless, a high code coverage is a good indicator that the code has been tested.
 
 ### Question 9
 
 > **Did you workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
 > **pull request can help improve version control.**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We made use of both branches and PRs in our project. In our group, each member had an branch that they worked on in*
-> *addition to the main branch. To merge code we ...*
->
 > Answer:
 
---- question 9 fill here ---
+We made use of both branches and PRs in our project. For every task, we created a branch and also protected the main branch by
+adding the following rules: at least one person needs to approve any PR, all your workflows have to pass and all conversations need 
+to be resolved. By using branches and pull requests in version control it ensures that changes are reviewed before merging,
+maintaining code integrity, and facilitating smoother project evolution.
 
 ### Question 10
 
@@ -206,15 +216,15 @@ Using Data Version Control (DVC) in the project provided an easy and seamless me
 > **multiple operating systems, python version etc. Do you make use of caching? Feel free to insert a link to one of**
 > **your github actions workflow.**
 >
-> Answer length: 200-300 words.
->
-> Example:
-> *We have organized our CI into 3 separate files: one for doing ..., one for running ... testing and one for running*
-> *... . In particular for our ..., we used ... .An example of a triggered workflow can be seen here: <weblink>*
->
 > Answer:
 
---- question 11 fill here ---
+We set up our Continuous Integration (CI) using two separate files: one for checking code standards, named .github/workflows/codecheck.yml, and another for running unit tests, called .github/workflows/tests.yml. To make sure our code meets standards, we use tools like Ruff and MyPy for type checking. We only tested the code on one operating system, specifically ubuntu-20.04, as it was the operating system used for developing the project, and on one version of Python, namely python 3.10.0, as required by the project.
+
+To make the processes faster, we use a caching mechanism. This way, every package we download won't be deleted after the workflow finishes, improving the overall speed of the workflow. Additionally, we included a `requirements_tests.txt` file with the specific packages required for running the workflow - for example, typing packages required by mypy.
+
+Our GitHub Actions workflows run automatically every time we merge a branch into the main branch or create a pull request. This helps us ensure our project's integrity and quality by consistently checking for issues and making sure everything works well.
+
+An example of a triggered workflow can be seen here: <https://github.com/CristianaLazar/mlops-bird-classification-project/actions/runs/7555347779/job/20570134093>
 
 ## Running code and tracking experiments
 
@@ -274,6 +284,7 @@ The ongoing analysis of these metrics and adaptation of parameters aimed to refi
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
 > **experiments? Include how you would run your docker images and include a link to one of your docker files.**
 >
+> Answer:
 
 As reproducibility is crucial, for this project, we developed several images: one for training, one for inference and one for deployment - to guarantee that the application can run on any device.  The following commands can be used to create and run the docker files:
 
