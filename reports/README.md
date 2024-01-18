@@ -188,7 +188,7 @@ Nevertheless, a high code coverage is a good indicator that the code has been te
 
 ### Question 9
 
-> **Did you workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
+> **Did your workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
 > **pull request can help improve version control.**
 >
 > Answer:
@@ -226,7 +226,7 @@ To make the processes faster, we use a caching mechanism. This way, every packag
 
 Our GitHub Actions workflows run automatically every time we merge a branch into the main branch or create a pull request. This helps us ensure our project's integrity and quality by consistently checking for issues and making sure everything works well, as a branch cannot be merged into `main` if not all the tests have passed. In this way, we ensure a high-quality and fast deployment process by creating and providing a set of tests that test the core functionality of our code.
 
-An example of a triggered workflow can be seen here: <https://github.com/CristianaLazar/mlops-bird-classification-project/actions/runs/7555347779/job/20570134093>
+An example of a triggered workflow can be seen [here](https://github.com/CristianaLazar/mlops-bird-classification-project/actions/runs/7555347779/job/20570134093).
 
 ## Running code and tracking experiments
 
@@ -240,7 +240,7 @@ An example of a triggered workflow can be seen here: <https://github.com/Cristia
 >
 > Answer:
 
-Experiments are configured using Hydra with distinct YAML files for each experiment in a config group. For instance, exp1.yaml and exp2.yaml are placed in an experiment directory. To run an experiment, you specify the configuration file as a command-line argument. For example, to run exp1, the command is python train_model.py experiment=exp1. This approach replaces the need for an argparser, as Hydra handles the parsing and merging of configurations from the command line and the YAML files.
+Experiments are configured using Hydra with distinct YAML files for each experiment in a config group. For instance, `exp1.yaml` and `exp2.yaml` are placed in an experiment directory. To run an experiment, you specify the configuration file as a command-line argument. For example, to run exp1, the command is `python train_model.py experiment=exp1`. This approach replaces the need for an argparser, as Hydra handles the parsing and merging of configurations from the command line and the YAML files.
 
 ### Question 13
 
@@ -251,13 +251,12 @@ Experiments are configured using Hydra with distinct YAML files for each experim
 
 To secure reproducibility and minimize information loss in experiments, Hydra and PyTorch Lightning are employed. Each experiment is configured using a dedicated YAML file, providing consistent settings. When an experiment runs, Hydra creates a unique directory, storing all outputs, logs, and configurations, ensuring a comprehensive record.
 
-For randomness control, PyTorch Lightning's seed_everything function is used to seed all random number generators consistently. This is crucial for experiments with stochastic processes, maintaining reproducibility. To replicate an experiment, the same configuration file and seed are used, like running python train_model.py experiment=exp1. This approach, combining Hydra's configuration management with PyTorch Lightning's seeding, guarantees precise and replicable experiment documentation.
+For randomness control, PyTorch Lightning's seed_everything function is used to seed all random number generators consistently. This is crucial for experiments with stochastic processes, maintaining reproducibility. To replicate an experiment, the same configuration file and seed are used, like running `python train_model.py experiment=exp1`. This approach, combining Hydra's configuration management with PyTorch Lightning's seeding, guarantees precise and replicable experiment documentation.
 
 ### Question 14
 
 > **Upload 1 to 3 screenshots that show the experiments that you have done in W&B (or another experiment tracking**
-> **service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. Explain what metrics you are tracking**
-> **and why they are important.**
+> **service of your choice). This may include loss graphs, logged images, hyperparameter sweeps etc. Explain what metrics you are tracking and why they are important.**
 >
 > Answer:
 
@@ -271,7 +270,7 @@ The step-wise tracking, as depicted in the image below, offers a granular view o
 
 The experiments conducted involved testing various image resizing parameters (224 and 384) and augmentation strategies. Analyzing how these factors impacted the key metrics was key to optimizing the models for accuracy.
 
-Also, the project compared different model sizes: one larger for cloud-based deployment and a smaller one for on-device applications. This differentiation was essential to envistigate weather an on-device model was viable without sacrificing too much model performance. 
+Also, the project compared different model sizes: one larger for cloud-based deployment and a smaller one for on-device applications. This differentiation was essential to invistigate whether an on-device model was viable without sacrificing too much model performance. 
 Below is an image showing the effects of these varying parameters and strategies on the model's performance.
 
 ![Training and Validation Metrics](figures/val_metrics.png)
@@ -301,7 +300,7 @@ To run the docker images:
 
 To automate the process even more, we created in Google Cloud a trigger for docker image creation. Every time a branch is merged into `main`, the docker files are created by using the configurations from `cloudbuild.yaml`. Once constructed, these docker images are executed using Google Cloud. 
 
-A link to the training Docker file can be found [here](https://github.com/CristianaLazar/mlops-bird-classification-project/blob/main/dockerfiles/trainer.dockerfile) 
+A link to the training Docker file can be found [here](https://github.com/CristianaLazar/mlops-bird-classification-project/blob/main/dockerfiles/trainer.dockerfile). 
 
 ### Question 16
 
@@ -310,7 +309,7 @@ A link to the training Docker file can be found [here](https://github.com/Cristi
 >
 > Answer:
 
-During our bird classification project, we adopted a systematic approach for debugging. The primary tool for this was the Python debugger, which allowed us to set breakpoints in the code. In our development environment, particularly VS Code, we used the F9 key to insert these inline breakpoints, visible as small red dots next to the code lines. This feature enabled us to execute the script in debug mode and step through the code interactively, observing the behavior and state of variables at each step. This method proved invaluable in identifying and fixing bugs efficiently.
+During our bird classification project, we adopted a systematic approach for debugging. The primary tool for this was the Python debugger, which allowed us to set breakpoints in the code. In our development environment, particularly VS Code, we used the F9 key to insert these inline breakpoints, visible as small red dots next to the code lines. This feature enabled us to execute the script in debug mode and step through the code interactively, observing the behavior and state of variables at each step.
 
 In addition to traditional debugging, we utilized PyTorch Lightning's simple profiler. This profiler is specifically designed for deep learning tasks and profiles key actions in the training loop, including `on_epoch_start`, `on_epoch_end`, `on_batch_start`, `tbptt_split_batch`, `model_forward`, `model_backward`, `on_after_backward`, `optimizer_step`, `on_batch_end`, `training_step_end`, and `on_training_end`. This comprehensive profiling helped us understand the performance of different segments of our code during the training process.
 After deploying our model on the school's high-performance computing (HPC) resources, we analyzed the profiler's output and found no significant bottlenecks.
@@ -328,28 +327,28 @@ After deploying our model on the school's high-performance computing (HPC) resou
 
 In our bird classification project, we leveraged various Google Cloud Platform (GCP) services, each serving a distinct role:
 
-1. **Vertex AI & Compute Engine**: Vertex AI service was crucial for building and training are model. Compute engine service for virtual machines for processing tasks and running backend services.
+1. **Vertex AI & Compute Engine**: Vertex AI service was crucial for building and training our model; while the Compute Engine service for VMs processed tasks and ran backend services.
 
 2. **Google Cloud Storage (Bucket)**: Served as our primary object storage solution, where we stored large datasets of bird images.
 
-3. **Cloud Logging**: A service for aggregating logs from services and VMs, aiding significantly in monitoring application activities.
+3. **Cloud Logging**: A service for aggregating logs from services and VMs, aiding in monitoring application activities.
 
-4. **Cloud Monitoring**: Provided real-time metrics, dashboards, and alerts, which were vital in tracking our application's performance and health.
+4. **Cloud Monitoring**: Provided real-time metrics, dashboards and alerts, which were vital in tracking our application's performance and health.
 
 5. **Container & Artifact Registry**: Registry was a key component in our CI/CD pipeline, managing our Docker images which were essential for automating the deployment process.
 
-6. **Cloud Build**: Automated our build, test, and deployment processes, enhancing our development workflow's efficiency.
+6. **Cloud Build**: Automated our build, test and deployment processes, enhancing our development workflow's efficiency.
 
 7. **Cloud Run**: Enabled us to deploy and manage containerized applications seamlessly on a fully managed serverless platform.
 
-8. **Cloud Triggers (Cloud Functions)**: Used for automatically initiating processes or workflows, model training in response to specific changes to the main branch.
+8. **Cloud Triggers (Cloud Functions)**: Used for automatically initiating processes or workflows, and model training in response to specific changes to the main branch.
 
 9. **Identity and Access Management (IAM)**: Managed user access, permissions and quotas.
 
 
 ### Question 18
 
-> **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
+> **The backbone of GCP is the Compute engine. Explain how you made use of this service and what type of VMs**
 > **you used?**
 >
 > Answer:
@@ -396,12 +395,12 @@ Project's Cloud Build history:
 
 ### Question 22
 
-> **Did you manage to deploy your model, either in locally or cloud? If not, describe why. If yes, describe how and**
+> **Did you manage to deploy your model, either locally or in the cloud? If not, describe why. If yes, describe how and**
 > **preferably how you invoke your deployed service?**
 >
 > Answer:
 
-The deployment process involved wrapping our trained model within a FastAPI application that enables users to run inference on JPG images of birds to receive the classification bird species name and certainty/probability as response. The application was then containerised to ensure consistent runs across environments by packaging the application and its dependencies into a Docker image. After verifying that the image ran as intended locally, it was pushed to the project's Cloud Registry and deployed with Cloud Run.
+The deployment process involved wrapping our trained model within a FastAPI application that enables users to run inference on JPG images of birds to receive the classification bird species name and certainty/probability as response. The application was then containerised to ensure consistent runs across environments by packaging the application and its dependencies into a Docker image. After verifying that the image ran as intended locally, it was pushed to the project's Container Registry and deployed with Cloud Run.
 
 To invoke the deployed service, users can send a POST request to the inference endpoint with a JPG image, replacing [path/to/image.jpg] with the correct image path:
 
@@ -439,7 +438,7 @@ Analysing the billing report, we observed that the credits have been spent on a 
 ### Question 25
 
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
-> **Additionally in your own words, explain the overall steps in figure.**
+> **Additionally in your own words, explain the overall steps in the figure.**
 >
 > Answer:
 
@@ -447,9 +446,9 @@ The diagram represents our system's architecture, which integrates local develop
 
 In our local environment, we start by coding in Python, taking advantage of the Pytorch Lightning framework for developing and scaling our machine learning models. Configuration management is streamlined with Hydra, version control is setup with Git and logging is managed with Weights and Biases. With each code commit and push to GitHub, workflows ensuring continuous integration through pytest and automatic cloud build are triggered.
 
-The triggered cloud builded docker images are stored in the Google Cloud Platform's artifact registry; models are trained through Vertex AI; and Cloud Run is used to deploy the best trained model as containerized application, providing an API service created with FastAPI to serve predictions to users.
+The triggered cloud builded docker images are stored in the Google Cloud Platform's artifact registry; models are trained through Vertex AI; and Cloud Run is used to deploy the best trained model as a containerized application, providing an API service created with FastAPI to serve predictions to users.
 
-Our data and models are version-controlled using DVC, with artifacts stored in a GCP Bucket. This allows us to handle large datasets and model files efficiently. Monitoring of our deployed models is critical; we employ GCP Logging to track operations and monitor compute resources.
+Our data and models are version-controlled using DVC, with artifacts stored in a GCP Bucket. This allows us to handle large datasets and model files efficiently. Monitoring of our deployed model is done through GCP Logging to track operations and monitor compute resources.
 
 Overall, our approach ensures a robust and automated process from local development to cloud deployment, emphasizing testing, reproducibility and monitoring throughout the machine learning lifecycle.
 
