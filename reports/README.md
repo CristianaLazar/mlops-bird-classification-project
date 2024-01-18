@@ -308,12 +308,6 @@ A link to the training Docker file can be found [here](https://github.com/Cristi
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
 > **try to profile your code or do you think it is already perfect?**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *Debugging method was dependent on group member. Some just used ... and others used ... . We did a single profiling*
-> *run of our main code at some point that showed ...*
->
 > Answer:
 
 During our bird classification project, we adopted a systematic approach for debugging. The primary tool for this was the Python debugger, which allowed us to set breakpoints in the code. In our development environment, particularly VS Code, we used the F9 key to insert these inline breakpoints, visible as small red dots next to the code lines. This feature enabled us to execute the script in debug mode and step through the code interactively, observing the behavior and state of variables at each step. This method proved invaluable in identifying and fixing bugs efficiently.
@@ -329,11 +323,6 @@ After deploying our model on the school's high-performance computing (HPC) resou
 ### Question 17
 
 > **List all the GCP services that you made use of in your project and shortly explain what each service does?**
->
-> Answer length: 50-200 words.
->
-> Example:
-> *We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...*
 >
 > Answer:
 
@@ -367,12 +356,6 @@ In our bird classification project, we leveraged various Google Cloud Platform (
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
->
-> Answer length: 100-200 words.
->
-> Example:
-> *We used the compute engine to run our ... . We used instances with the following hardware: ... and we started the*
-> *using a custom container: ...*
 >
 > Answer:
 
@@ -438,12 +421,6 @@ PS: POST a selfie and see if you discover the application's Looney Bird easter e
 > **Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how**
 > **monitoring would help the longevity of your application.**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We did not manage to implement monitoring. We would like to have monitoring implemented such that over time we could*
-> *measure ... and ... that would inform us about this ... behaviour of our application.*
->
 > Answer:
 
 Yes, we successfully implemented monitoring for our deployed model. Utilizing the Monitoring tab in our Cloud Run service, we were able to access diverse plots displaying key performance metrics. This setup allowed us to continuously observe and evaluate the operational aspects of our application, ensuring optimal performance and rapid response to any issues.
@@ -473,8 +450,7 @@ To further enhance our monitoring capabilities, we set up several alerts within 
 ### Question 25
 
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
-> **You can take inspiration from [this figure](figures/overview.png). Additionally in your own words, explain the**
-> **overall steps in figure.**
+> **Additionally in your own words, explain the overall steps in figure.**
 >
 > Answer length: 200-400 words
 >
@@ -506,14 +482,12 @@ To further enhance our monitoring capabilities, we set up several alerts within 
 > **State the individual contributions of each team member. This is required information from DTU, because we need to**
 > **make sure all members contributed actively to the project**
 >
-> Answer length: 50-200 words.
->
-> Example:
-> *Student sXXXXXX was in charge of developing of setting up the initial cookie cutter project and developing of the*
-> *docker containers for training our applications.*
-> *Student sXXXXXX was in charge of training our models in the cloud and deploying them afterwards.*
-> *All members contributed to code by...*
->
 > Answer:
 
---- question 27 fill here ---
+Student s184202 was in charge of setting up the repository with the cookie cutter template, DVC the dataset with Google Drive, creating training and model files using Pytorch Lightning and WANDB, and training a model on DTU's HPC.
+
+Student s193973 was in charge of setting up config files and hydra, creating a GCP bucket, making a FastAPI application to run inference and deploying it as a Docker image on Cloud Run.
+
+Student s222681 was in charge of profiling the code, training a model on Vertex AI and setting up monitoring of the deployed model through SLO and alerts.
+
+Student s222698 was in charge of setting up unit tests, configuring continuous integration with workflows on GitHub, creating a GCP bucket and a trigger flow for automatically building Docker images.
