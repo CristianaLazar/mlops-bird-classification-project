@@ -130,7 +130,6 @@ The project's code structure, initially set up using the provided cookiecutter t
 
 Apart from these additions, all other folders from the cookiecutter template were utilized, with the exception of the `notebooks` folder, which was not needed for this project. These minor changes ensure that the project structure remains organized and efficient, while being tailored to the project.
 
-
 ### Question 6
 
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
@@ -139,7 +138,6 @@ Apart from these additions, all other folders from the cookiecutter template wer
 > Answer:
 
 Sticking to PEP 8 guidelines was the key strategy for code quality and format. In large-scale projects, this approach is important. It ensures the code is clear and uniform, which simplifies reading and teamwork. Following these standards also helps in keeping up the quality of the code, minimizes errors, and makes debugging easier. Essentially, it’s about easing the team collaboration by maintaining a strong codebase in more complex projects.
-
 
 ## Version control
 
@@ -195,10 +193,13 @@ Nevertheless, a high code coverage is a good indicator that the code has been te
 >
 > Answer:
 
+
 We made use of both branches and PRs in our project. For every task, we created a branch and also protected the main branch by
 adding the following rules: at least one person needs to approve any PR, all your workflows have to pass and all conversations need 
-to be resolved. By using branches and pull requests in version control it ensures that changes are reviewed before merging,
-maintaining code integrity, and facilitating smoother project evolution.
+to be resolved. 
+
+By using branches and pull requests in version control it ensures that changes are reviewed before merging,
+maintaining code integrity, and facilitating smoother project evolution. By creating individual branches for each task and not for each team member it facilitated the workflow, as each of us could work in parallel. Additionally, the PR reviews helped us to keep aware of the work that others have done.
 
 ### Question 10
 
@@ -209,7 +210,6 @@ maintaining code integrity, and facilitating smoother project evolution.
 
 Using Data Version Control (DVC) in the project provided an easy and seamless method to pull data onto VM instances for training, both on DTU's High-Performance Computing (HPC) Cluster and Google Cloud Platform (GCP). This setup allowed for straightforward synchronization of the latest datasets and models from the DVC remote (initially on Google Drive, then on a GCP bucket) directly to the VMs. Whether training was conducted on the HPC Cluster or GCP, DVC ensured that the most current version of the data was always used, streamlining the workflow and enhancing the efficiency and consistency of the training process across different platforms.
 
-
 ### Question 11
 
 > **Discuss you continues integration setup. What kind of CI are you running (unittesting, linting, etc.)? Do you test**
@@ -218,11 +218,13 @@ Using Data Version Control (DVC) in the project provided an easy and seamless me
 >
 > Answer:
 
-We set up our Continuous Integration (CI) using two separate files: one for checking code standards, named .github/workflows/codecheck.yml, and another for running unit tests, called .github/workflows/tests.yml. To make sure our code meets standards, we use tools like Ruff and MyPy for type checking. We only tested the code on one operating system, specifically ubuntu-20.04, as it was the operating system used for developing the project, and on one version of Python, namely python 3.10.0, as required by the project.
+We set up our Continuous Integration (CI) using two separate files: one for checking code standards, named .github/workflows/codecheck.yml, and another for running unit tests, called .github/workflows/tests.yml. To make sure our code meets standards, we use tools like Ruff and MyPy for type checking. Using a linter as Ruff offers advantages such as real-time capabilities and low resource requirements being facile to integrate and use in our project. On the other hand, MyPy is a static type checker for Python that enhances code reliability and maintainability. Both tools are needed to ensure a high quality of the code.
 
-To make the processes faster, we use a caching mechanism. This way, every package we download won't be deleted after the workflow finishes, improving the overall speed of the workflow. Additionally, we included a `requirements_tests.txt` file with the specific packages required for running the workflow - for example, typing packages required by mypy.
+In terms of testing environments, we only tested the code on one operating system, specifically ubuntu-20.04, as it was the operating system used for developing the project, and on one version of Python, namely Python 3.10.0, as it is required by the project.
 
-Our GitHub Actions workflows run automatically every time we merge a branch into the main branch or create a pull request. This helps us ensure our project's integrity and quality by consistently checking for issues and making sure everything works well.
+To make the processes faster, we use a caching mechanism. This way, every package we download won't be deleted after the workflow finishes, improving the overall speed of the workflow. Additionally, we included a `requirements_tests.txt` file with the specific packages required for running the workflow - for example, typing packages required by MyPy.
+
+Our GitHub Actions workflows run automatically every time we merge a branch into the main branch or create a pull request. This helps us ensure our project's integrity and quality by consistently checking for issues and making sure everything works well, as a branch cannot be merged into `main` if not all the tests have passed. In this way, we ensure a high-quality and fast deployment process by creating and providing a set of tests that test the core functionality of our code.
 
 An example of a triggered workflow can be seen here: <https://github.com/CristianaLazar/mlops-bird-classification-project/actions/runs/7555347779/job/20570134093>
 
@@ -240,7 +242,6 @@ An example of a triggered workflow can be seen here: <https://github.com/Cristia
 
 Experiments are configured using Hydra with distinct YAML files for each experiment in a config group. For instance, exp1.yaml and exp2.yaml are placed in an experiment directory. To run an experiment, you specify the configuration file as a command-line argument. For example, to run exp1, the command is python train_model.py experiment=exp1. This approach replaces the need for an argparser, as Hydra handles the parsing and merging of configurations from the command line and the YAML files.
 
-
 ### Question 13
 
 > **Reproducibility of experiments are important. Related to the last question, how did you secure that no information**
@@ -251,7 +252,6 @@ Experiments are configured using Hydra with distinct YAML files for each experim
 To secure reproducibility and minimize information loss in experiments, Hydra and PyTorch Lightning are employed. Each experiment is configured using a dedicated YAML file, providing consistent settings. When an experiment runs, Hydra creates a unique directory, storing all outputs, logs, and configurations, ensuring a comprehensive record.
 
 For randomness control, PyTorch Lightning's seed_everything function is used to seed all random number generators consistently. This is crucial for experiments with stochastic processes, maintaining reproducibility. To replicate an experiment, the same configuration file and seed are used, like running python train_model.py experiment=exp1. This approach, combining Hydra's configuration management with PyTorch Lightning's seeding, guarantees precise and replicable experiment documentation.
-
 
 ### Question 14
 
@@ -278,7 +278,6 @@ Below is an image showing the effects of these varying parameters and strategies
 
 The ongoing analysis of these metrics and adaptation of parameters aimed to refine the models, ensuring they are not only accurate but also effective and reliable for practical use.
 
-
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
@@ -304,22 +303,18 @@ To automate the process even more, we created in Google Cloud a trigger for dock
 
 A link to the training Docker file can be found [here](https://github.com/CristianaLazar/mlops-bird-classification-project/blob/main/dockerfiles/trainer.dockerfile) 
 
-
-
 ### Question 16
 
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
 > **try to profile your code or do you think it is already perfect?**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *Debugging method was dependent on group member. Some just used ... and others used ... . We did a single profiling*
-> *run of our main code at some point that showed ...*
->
 > Answer:
 
---- question 16 fill here ---
+During our bird classification project, we adopted a systematic approach for debugging. The primary tool for this was the Python debugger, which allowed us to set breakpoints in the code. In our development environment, particularly VS Code, we used the F9 key to insert these inline breakpoints, visible as small red dots next to the code lines. This feature enabled us to execute the script in debug mode and step through the code interactively, observing the behavior and state of variables at each step. This method proved invaluable in identifying and fixing bugs efficiently.
+
+In addition to traditional debugging, we utilized PyTorch Lightning's simple profiler. This profiler is specifically designed for deep learning tasks and profiles key actions in the training loop, including `on_epoch_start`, `on_epoch_end`, `on_batch_start`, `tbptt_split_batch`, `model_forward`, `model_backward`, `on_after_backward`, `optimizer_step`, `on_batch_end`, `training_step_end`, and `on_training_end`. This comprehensive profiling helped us understand the performance of different segments of our code during the training process.
+After deploying our model on the school's high-performance computing (HPC) resources, we analyzed the profiler's output and found no significant bottlenecks.
+
 
 ## Working in the cloud
 
@@ -329,29 +324,47 @@ A link to the training Docker file can be found [here](https://github.com/Cristi
 
 > **List all the GCP services that you made use of in your project and shortly explain what each service does?**
 >
-> Answer length: 50-200 words.
->
-> Example:
-> *We used the following two services: Engine and Bucket. Engine is used for... and Bucket is used for...*
->
 > Answer:
 
---- question 17 fill here ---
+In our bird classification project, we leveraged various Google Cloud Platform (GCP) services, each serving a distinct role:
+
+1. **Vertex AI API**: This service was crucial for building, deploying, and scaling our machine learning models. We primarily used it for training our bird classification model.
+
+2. **Artifact Registry**: This registry was a key component in our CI/CD pipeline, managing our Docker images which were essential for automating the deployment process.
+
+3. **Google Cloud Storage (Bucket)**: Served as our primary object storage solution, where we stored large datasets of bird images and other related data.
+
+4. **Cloud Logging**: This was integral for aggregating logs from different services and VMs, aiding significantly in monitoring application activities and debugging.
+
+5. **Cloud Monitoring**: Provided real-time metrics, dashboards, and alerts, which were vital in tracking our application's performance and health.
+
+6. **Container Registry**: Initially used for hosting our Docker container images, this service facilitated easy management and deployment of these images.
+
+7. **Compute Engine**: The backbone of our application, offering scalable virtual machines (VMs) for processing tasks and running backend services.
+
+8. **Cloud Build**: Automated our build, test, and deployment processes, enhancing our development workflow's efficiency.
+
+9. **Cloud Run**: Enabled us to deploy and manage containerized applications seamlessly on a fully managed serverless platform.
+
+10. **Cloud Triggers (Cloud Functions)**: Used for automatically initiating processes or workflows, model training in response to specific changes to main branch.
+
+11. **Identity and Access Management (IAM)**: Managed user access and permissions, ensuring secure, controlled access to our GCP resources.
+
+12. **Google Cloud Console**: Offered a comprehensive, user-friendly interface for managing and monitoring all our GCP resources, services, and applications.
 
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We used the compute engine to run our ... . We used instances with the following hardware: ... and we started the*
-> *using a custom container: ...*
->
 > Answer:
 
---- question 18 fill here ---
+In our project, we initially faced challenges in being granted GPU resources on Google Cloud Platform (GCP). Consequently, our initial setup involved running a custom Vertex AI job, where the backbone was the Compute Engine's 'n1-highmem-2' instance. This configuration provided us with high memory capacity, crucial for our data-intensive tasks, but lacked GPU acceleration.
+
+After reaching out for support and being granted access to GPU resources, we shifted to a more robust setup. We created a new job that leveraged the NVIDIA T4 GPU, a significant upgrade for our computational needs. This GPU-enabled instance allowed us to accelerate our model training and inference processes significantly.
+
+For both setups, we utilized Docker containers. These containers were pre-loaded with all the necessary dependencies and our application code. This approach ensured a consistent and reproducible environment across different stages of our project. 
+
 
 ### Question 19
 
@@ -408,15 +421,13 @@ PS: POST a selfie and see if you discover the application's Looney Bird easter e
 > **Did you manage to implement monitoring of your deployed model? If yes, explain how it works. If not, explain how**
 > **monitoring would help the longevity of your application.**
 >
-> Answer length: 100-200 words.
->
-> Example:
-> *We did not manage to implement monitoring. We would like to have monitoring implemented such that over time we could*
-> *measure ... and ... that would inform us about this ... behaviour of our application.*
->
 > Answer:
 
---- question 23 fill here ---
+Yes, we successfully implemented monitoring for our deployed model. Utilizing the Monitoring tab in our Cloud Run service, we were able to access diverse plots displaying key performance metrics. This setup allowed us to continuously observe and evaluate the operational aspects of our application, ensuring optimal performance and rapid response to any issues.
+
+Additionally, we established a Service Level Objective (SLO) focusing on critical parameters such as availability, latency, and CPU usage time. These objectives serve as benchmarks against which we can measure the reliability and efficiency of our service, providing a structured approach to maintaining high service quality.
+
+To further enhance our monitoring capabilities, we set up several alerts within the monitoring service. These alerts track metrics like the sum of cloud function invocations, CPU utilization, and ingress bytes. By doing so, we are promptly notified of significant changes or potential issues, such as unusual spikes in function calls, high CPU demand, or abnormal network traffic. This proactive monitoring strategy is pivotal in ensuring the longevity of our application, as it enables us to swiftly identify and rectify operational inefficiencies or disruptions, thereby maintaining consistent service quality.
 
 ### Question 24
 
