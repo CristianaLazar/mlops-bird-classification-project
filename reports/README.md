@@ -196,8 +196,10 @@ Nevertheless, a high code coverage is a good indicator that the code has been te
 
 We made use of both branches and PRs in our project. For every task, we created a branch and also protected the main branch by
 adding the following rules: at least one person needs to approve any PR, all your workflows have to pass and all conversations need 
-to be resolved. By using branches and pull requests in version control it ensures that changes are reviewed before merging,
-maintaining code integrity, and facilitating smoother project evolution.
+to be resolved. 
+
+By using branches and pull requests in version control it ensures that changes are reviewed before merging,
+maintaining code integrity, and facilitating smoother project evolution. By creating individual branches for each task and not for each team member it facilitated the workflow, as each of us could work in parallel. Additionally, the PR reviews helped us to keep aware of the work that others have done.
 
 ### Question 10
 
@@ -216,11 +218,13 @@ Using Data Version Control (DVC) in the project provided an easy and seamless me
 >
 > Answer:
 
-We set up our Continuous Integration (CI) using two separate files: one for checking code standards, named .github/workflows/codecheck.yml, and another for running unit tests, called .github/workflows/tests.yml. To make sure our code meets standards, we use tools like Ruff and MyPy for type checking. We only tested the code on one operating system, specifically ubuntu-20.04, as it was the operating system used for developing the project, and on one version of Python, namely python 3.10.0, as required by the project.
+We set up our Continuous Integration (CI) using two separate files: one for checking code standards, named .github/workflows/codecheck.yml, and another for running unit tests, called .github/workflows/tests.yml. To make sure our code meets standards, we use tools like Ruff and MyPy for type checking. Using a linter as Ruff offers advantages such as real-time capabilities and low resource requirements being facile to integrate and use in our project. On the other hand, MyPy is a static type checker for Python that enhances code reliability and maintainability. Both tools are needed to ensure a high quality of the code.
 
-To make the processes faster, we use a caching mechanism. This way, every package we download won't be deleted after the workflow finishes, improving the overall speed of the workflow. Additionally, we included a `requirements_tests.txt` file with the specific packages required for running the workflow - for example, typing packages required by mypy.
+In terms of testing environments, we only tested the code on one operating system, specifically ubuntu-20.04, as it was the operating system used for developing the project, and on one version of Python, namely Python 3.10.0, as it is required by the project.
 
-Our GitHub Actions workflows run automatically every time we merge a branch into the main branch or create a pull request. This helps us ensure our project's integrity and quality by consistently checking for issues and making sure everything works well.
+To make the processes faster, we use a caching mechanism. This way, every package we download won't be deleted after the workflow finishes, improving the overall speed of the workflow. Additionally, we included a `requirements_tests.txt` file with the specific packages required for running the workflow - for example, typing packages required by MyPy.
+
+Our GitHub Actions workflows run automatically every time we merge a branch into the main branch or create a pull request. This helps us ensure our project's integrity and quality by consistently checking for issues and making sure everything works well, as a branch cannot be merged into `main` if not all the tests have passed. In this way, we ensure a high-quality and fast deployment process by creating and providing a set of tests that test the core functionality of our code.
 
 An example of a triggered workflow can be seen here: <https://github.com/CristianaLazar/mlops-bird-classification-project/actions/runs/7555347779/job/20570134093>
 
