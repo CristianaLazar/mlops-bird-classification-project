@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.10-slim
+FROM nvidia/cuda:11.0.3-base-ubuntu20.04
 
 # install python
 RUN apt update && \
