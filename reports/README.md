@@ -328,29 +328,24 @@ After deploying our model on the school's high-performance computing (HPC) resou
 
 In our bird classification project, we leveraged various Google Cloud Platform (GCP) services, each serving a distinct role:
 
-1. **Vertex AI API**: This service was crucial for building, deploying, and scaling our machine learning models. We primarily used it for training our bird classification model.
+1. **Vertex AI & Compute Engine **: Vertex AI service was crucial for building and training are model. Compute engine service for virtual machines for processing tasks and running backend services.
 
-2. **Artifact Registry**: This registry was a key component in our CI/CD pipeline, managing our Docker images which were essential for automating the deployment process.
+2. **Google Cloud Storage (Bucket)**: Served as our primary object storage solution, where we stored large datasets of bird images.
 
-3. **Google Cloud Storage (Bucket)**: Served as our primary object storage solution, where we stored large datasets of bird images and other related data.
+3. **Cloud Logging**: A service for aggregating logs from services and VMs, aiding significantly in monitoring application activities.
 
-4. **Cloud Logging**: This was integral for aggregating logs from different services and VMs, aiding significantly in monitoring application activities and debugging.
+4. **Cloud Monitoring**: Provided real-time metrics, dashboards, and alerts, which were vital in tracking our application's performance and health.
 
-5. **Cloud Monitoring**: Provided real-time metrics, dashboards, and alerts, which were vital in tracking our application's performance and health.
+5. **Container & Artifact Registry**: Registry was a key component in our CI/CD pipeline, managing our Docker images which were essential for automating the deployment process.
 
-6. **Container Registry**: Initially used for hosting our Docker container images, this service facilitated easy management and deployment of these images.
+6. **Cloud Build**: Automated our build, test, and deployment processes, enhancing our development workflow's efficiency.
 
-7. **Compute Engine**: The backbone of our application, offering scalable virtual machines (VMs) for processing tasks and running backend services.
+7. **Cloud Run**: Enabled us to deploy and manage containerized applications seamlessly on a fully managed serverless platform.
 
-8. **Cloud Build**: Automated our build, test, and deployment processes, enhancing our development workflow's efficiency.
+8. **Cloud Triggers (Cloud Functions)**: Used for automatically initiating processes or workflows, model training in response to specific changes to the main branch.
 
-9. **Cloud Run**: Enabled us to deploy and manage containerized applications seamlessly on a fully managed serverless platform.
+9. **Identity and Access Management (IAM)**: Managed user access, permissions and quotas.
 
-10. **Cloud Triggers (Cloud Functions)**: Used for automatically initiating processes or workflows, model training in response to specific changes to main branch.
-
-11. **Identity and Access Management (IAM)**: Managed user access and permissions, ensuring secure, controlled access to our GCP resources.
-
-12. **Google Cloud Console**: Offered a comprehensive, user-friendly interface for managing and monitoring all our GCP resources, services, and applications.
 
 ### Question 18
 
@@ -441,7 +436,7 @@ To further enhance our monitoring capabilities, we set up several alerts within 
 >
 > Answer:
 
---- question 24 fill here ---
+Analysing the billing report, we observed that the credits have been spent on the project and not on individual contributions. In the end, we end up using 44.08 credits for Cloud Storage, 3.16 for Compute Engine, 0.24 for Networking, and 0.03 for Cloud Run. Cloud Storage costs the most, even if we only store 5 GB of data.
 
 ## Overall discussion of project
 
