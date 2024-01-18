@@ -443,6 +443,8 @@ Analysing the billing report, we observed that the credits have been spent on a 
 >
 > Answer:
 
+![Architecture](figures/architecture.png)
+
 The diagram represents our system's architecture, which integrates local development with cloud-based deployment and monitoring, utilizing a range of services and tools for comprehensive MLOps.
 
 In our local environment, we start by coding in Python, taking advantage of the Pytorch Lightning framework for developing and scaling our machine learning models. Configuration management is streamlined with Hydra, version control is setup with Git and logging is managed with Weights and Biases. With each code commit and push to GitHub, workflows ensuring continuous integration through pytest and automatic cloud build are triggered.
@@ -453,13 +455,13 @@ Our data and models are version-controlled using DVC, with artifacts stored in a
 
 Overall, our approach ensures a robust and automated process from local development to cloud deployment, emphasizing testing, reproducibility and monitoring throughout the machine learning lifecycle.
 
-![Architecture](figures/architecture.png)
 
 ### Question 26
 
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
 > **challenges?**
 >
+> Answer:
 
 During the project development, we encountered some challenges. Firstly, the Data Version Control did not do as expected; we faced problems when data was stored in a Google Drive folder and a Google Cloud Bucket. Usually, we manage to make the DVC work by repeating the `dvc push` and `dvc pull` actions. 
 
