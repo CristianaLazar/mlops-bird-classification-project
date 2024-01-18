@@ -274,7 +274,7 @@ The experiments conducted involved testing various image resizing parameters (22
 Also, the project compared different model sizes: one larger for cloud-based deployment and a smaller one for on-device applications. This differentiation was essential to envistigate weather an on-device model was viable without sacrificing too much model performance. 
 Below is an image showing the effects of these varying parameters and strategies on the model's performance.
 
-![Training and Validation Metrics](figures/train_val_metrics.png)
+![Training and Validation Metrics](figures/val_metrics.png)
 
 The ongoing analysis of these metrics and adaptation of parameters aimed to refine the models, ensuring they are not only accurate but also effective and reliable for practical use.
 
@@ -328,7 +328,7 @@ After deploying our model on the school's high-performance computing (HPC) resou
 
 In our bird classification project, we leveraged various Google Cloud Platform (GCP) services, each serving a distinct role:
 
-1. **Vertex AI & Compute Engine **: Vertex AI service was crucial for building and training are model. Compute engine service for virtual machines for processing tasks and running backend services.
+1. **Vertex AI & Compute Engine**: Vertex AI service was crucial for building and training are model. Compute engine service for virtual machines for processing tasks and running backend services.
 
 2. **Google Cloud Storage (Bucket)**: Served as our primary object storage solution, where we stored large datasets of bird images.
 
@@ -428,15 +428,9 @@ To further enhance our monitoring capabilities, we set up several alerts within 
 
 > **How many credits did you end up using during the project and what service was most expensive?**
 >
-> Answer length: 25-100 words.
->
-> Example:
-> *Group member 1 used ..., Group member 2 used ..., in total ... credits was spend during development. The service*
-> *costing the most was ... due to ...*
->
 > Answer:
 
-Analysing the billing report, we observed that the credits have been spent on the project and not on individual contributions. In the end, we end up using 44.08 credits for Cloud Storage, 3.16 for Compute Engine, 0.24 for Networking, and 0.03 for Cloud Run. Cloud Storage costs the most, even if we only store 5 GB of data.
+Analysing the billing report, we observed that the credits have been spent on a projectbasis and not on individual contributions. In the end, we ended up using 44.08 credits for Cloud Storage, 3.16 for Compute Engine, 0.24 for Networking and 0.03 for Cloud Run. Cloud Storage costs the most, even if we only store 5 GB of data.
 
 ## Overall discussion of project
 
@@ -447,16 +441,19 @@ Analysing the billing report, we observed that the credits have been spent on th
 > **Include a figure that describes the overall architecture of your system and what services that you make use of.**
 > **Additionally in your own words, explain the overall steps in figure.**
 >
-> Answer length: 200-400 words
->
-> Example:
->
-> *The starting point of the diagram is our local setup, where we integrated ... and ... and ... into our code.*
-> *Whenever we commit code and puch to github, it auto triggers ... and ... . From there the diagram shows ...*
->
 > Answer:
 
---- question 25 fill here ---
+The diagram represents our system's architecture, which integrates local development with cloud-based deployment and monitoring, utilizing a range of services and tools for comprehensive MLOps.
+
+In our local environment, we start by coding in Python, taking advantage of the Pytorch Lightning framework for developing and scaling our machine learning models. Configuration management is streamlined with Hydra, version control is setup with Git and logging is managed with Weights and Biases. With each code commit and push to GitHub, workflows ensuring continuous integration through pytest and automatic cloud build are triggered.
+
+The triggered cloud builded docker images are stored in the Google Cloud Platform's artifact registry; models are trained through Vertex AI; and Cloud Run is used to deploy the best trained model as containerized application, providing an API service created with FastAPI to serve predictions to users.
+
+Our data and models are version-controlled using DVC, with artifacts stored in a GCP Bucket. This allows us to handle large datasets and model files efficiently. Monitoring of our deployed models is critical; we employ GCP Logging to track operations and monitor compute resources.
+
+Overall, our approach ensures a robust and automated process from local development to cloud deployment, emphasizing testing, reproducibility and monitoring throughout the machine learning lifecycle.
+
+![Architecture](figures/architecture.png)
 
 ### Question 26
 
