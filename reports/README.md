@@ -442,7 +442,7 @@ Analysing the billing report, we observed that the credits have been spent on a 
 >
 > Answer:
 
-![Architecture](figures/architecture.png)
+![Architecture](figures\architecture.png)
 
 The diagram represents our system's architecture, which integrates local development with cloud-based deployment and monitoring, utilizing a range of services and tools for comprehensive MLOps.
 
